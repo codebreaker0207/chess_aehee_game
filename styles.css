@@ -1,0 +1,106 @@
+:root{
+  --width: 640px;
+  --board-size: 640px;
+  --light: rgb(240,217,181);
+  --dark: rgb(181,136,99);
+  --highlight: rgb(246,246,105);
+  --selected: rgb(186,202,68);
+  --last: rgb(170,162,58);
+  --text: rgb(25,25,25);
+  --overlay-bg: rgba(0,0,0,0.7);
+  font-family: "Noto Sans KR", Arial, sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  background: #111;
+  color:var(--text);
+}
+
+#game-container{
+  width: var(--width);
+  position: relative;
+}
+
+#board-canvas{
+  display:block;
+  background: #444;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+#ui{
+  margin-top: 10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+#status{
+  font-size:18px;
+  color:white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+#controls button{
+  margin-left:6px;
+  padding:6px 10px;
+  border-radius:6px;
+  border:none;
+  background:#efefef;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* 프로모션 오버레이 */
+#promo-overlay{
+  position: fixed;
+  left:0;right:0;top:0;bottom:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: var(--overlay-bg);
+  z-index: 30;
+}
+
+.hidden{ display:none; }
+
+#promo-card{
+  background: #f3f3f3;
+  padding: 18px;
+  border-radius: 12px;
+  min-width: 480px;
+  text-align:center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#promo-title{
+  margin-bottom:12px;
+  font-size:20px;
+  color:#222;
+}
+
+#promo-options{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.promo-option{
+  width:100px;
+  height:140px;
+  border-radius:10px;
+  background:#ebebeb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #505050;
+  font-size:36px;
+  user-select:none;
+  cursor:pointer;
+}
