@@ -1,101 +1,88 @@
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
-  font-family: "Arial", sans-serif;
-  background: #fafafa;
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-header, footer {
+  padding: 0;
   text-align: center;
-  padding: 1rem;
-  background: #eee;
 }
 
-.game-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
+header {
+  background: #333;
+  color: white;
+  padding: 15px;
 }
 
-canvas {
-  border: 3px solid #444;
+h1 {
+  margin: 0.5em 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  background: #4CAF50;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+#board-canvas {
+  display: block;
+  margin: 20px auto;
   max-width: 95vw;
   height: auto;
-  touch-action: none; /* 모바일 터치 충돌 방지 */
+  border: 2px solid #000;
 }
 
-.controls {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
+#controls {
+  margin: 10px 0;
 }
 
 button {
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 6px;
-  background: #4caf50;
+  padding: 10px 15px;
+  margin: 0 5px;
+  background: #4CAF50;
   color: white;
-  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
 }
-
 button:hover {
   background: #45a049;
 }
 
 #status {
-  margin-top: 0.5rem;
-  font-weight: bold;
+  margin: 15px;
+  font-size: 18px;
 }
 
-/* 승격 오버레이 */
+/* 승진 오버레이 */
 #promo-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 #promo-overlay.hidden {
   display: none;
 }
-
-.promo-box {
+#promo-options {
   background: white;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 20px;
+  border-radius: 10px;
   display: flex;
-  gap: 1rem;
+  gap: 15px;
 }
-
 .promo-option {
-  font-size: 2rem;
-  padding: 1rem;
+  font-size: 32px;
   cursor: pointer;
-  border: 2px solid #444;
-  border-radius: 6px;
 }
 
-.promo-option:hover {
-  background: #ddd;
-}
-
-/* 반응형 */
-@media (max-width: 700px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-  button {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.8rem;
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  #board-canvas {
+    width: 95vw;
+    height: 95vw;
   }
 }
