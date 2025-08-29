@@ -5,11 +5,14 @@
   --muted:#9aa7bd;
   --card:#0b1020;
 }
+
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter, 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+html,body{height:100%;margin:0;font-family:Inter,'Noto Sans KR',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
 body{background:linear-gradient(180deg,#07102395 0%,#071023 100%),var(--bg);color:#e6eef6;display:flex;flex-direction:column;align-items:center}
+
 .site-header{width:100%;max-width:1100px;padding:18px 20px;display:flex;align-items:center;gap:18px}
 .site-header .home-link{color:var(--muted);text-decoration:none;font-weight:600}
+
 .container{width:100%;max-width:1100px;padding:12px}
 .game-area{display:flex;gap:24px;align-items:flex-start}
 .board-wrap{background:var(--panel);padding:18px;border-radius:12px;display:flex;gap:18px}
@@ -21,12 +24,15 @@ canvas{background:#071428;border-radius:6px;display:block}
 .info{color:var(--muted);font-size:13px}
 .next-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted)}
 .site-footer{text-align:center;padding:18px;color:var(--muted);width:100%;max-width:1100px}
+
 .mobile-controls{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;display:flex;gap:12px;align-items:center}
 .m-btn{width:62px;height:62px;border-radius:50%;border:0;background:#0e1730;color:#fff;font-size:20px;box-shadow:0 6px 18px rgba(2,6,23,.6)}
 .m-mid{display:flex;flex-direction:column;gap:8px}
+
 @media(min-width:900px){
   .mobile-controls{display:none}
 }
+
 @media(max-width:899px){
   .game-area{flex-direction:column;align-items:center}
   .hud{flex-direction:row;gap:8px;width:100%;justify-content:space-around}
