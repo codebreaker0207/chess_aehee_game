@@ -123,4 +123,18 @@
     else if(e.code==='Space'){while(!collide(arena,player)){player.pos.y++} player.pos.y--; merge(arena,player); sweep(); playerReset();}
   });
 
-  document.getElementById('
+  document.getElementById('mLeft').addEventListener('touchstart',e=>{e.preventDefault(); playerMove(-1);});
+  document.getElementById('mRight').addEventListener('touchstart',e=>{e.preventDefault(); playerMove(1);});
+  document.getElementById('mRotate').addEventListener('touchstart',e=>{e.preventDefault(); playerRotate();});
+  document.getElementById('mDown').addEventListener('touchstart',e=>{e.preventDefault(); playerDrop();});
+
+  document.getElementById('startBtn').addEventListener('click',()=>{
+    arena=createMatrix(cols,rows); player.score=0; player.lines=0; player.level=1;
+    dropInterval=1000; gameOver=false; paused=false; next=randomPiece(); playerReset(); updateHUD();
+  });
+  document.getElementById('pauseBtn').addEventListener('click',()=>{
+    paused=!paused; document.getElementById('pauseBtn').innerText=paused?'재개':'일시정지';
+  });
+
+  playerReset(); updateHUD(); update();
+})();
