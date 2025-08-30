@@ -5,21 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>aehee 게임 웹사이트</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- 구글 애드센스 (사용자님이 넣은 값 그대로) -->
   <script async 
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8997409885408315"
     crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- 상단 네비게이션 -->
   <header>
     <h1>🎮 aehee 게임</h1>
-    <p>동아리에서 만든 게임들을 모아둔 공간입니다.</p>
+    <nav>
+      <ul>
+        <li><a href="#intro">게임 소개</a></li>
+        <li><a href="#games">게임</a></li>
+        <li><a href="#contact">연락처</a></li>
+        <li><a href="#email">이메일</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
     <!-- 게임 소개 -->
-    <section class="intro">
+    <section id="intro" class="intro">
       <h2>게임 소개</h2>
       <p>
         저희 동아리는 즐겁게 배우고 만드는 것을 목표로 합니다.<br>
@@ -42,16 +48,21 @@
     </section>
 
     <!-- 게임 시작 -->
-    <section class="games">
+    <section id="games" class="games">
       <h2>게임 시작하기</h2>
       <a href="game.html" class="btn">▶ 체스 게임 플레이</a>
       <a href="tetris/index.html" class="btn">▶ 테트리스 플레이</a>
     </section>
 
     <!-- 연락처 -->
-    <section class="contact">
+    <section id="contact" class="contact">
       <h2>연락처</h2>
       <p>문의사항이나 제안은 아래 메일로 보내주세요.</p>
+    </section>
+
+    <!-- 이메일 -->
+    <section id="email" class="email">
+      <h2>이메일</h2>
       <p><strong>Email:</strong> aehee_game@example.com</p>
     </section>
   </main>
