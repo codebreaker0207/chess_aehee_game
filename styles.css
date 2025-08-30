@@ -1,100 +1,66 @@
-/* 기본 설정 */
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 16px;
-  background: #f4f6f9;
-  color: #333;
 }
 
-/* 헤더 */
 header {
-  background: linear-gradient(90deg, #4CAF50, #2e7d32);
+  background: #333;
   color: white;
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 15px;
 }
+
 header h1 {
   margin: 0.5em 0;
 }
-header nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-header nav ul li {
-  display: inline;
-}
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-header nav ul li a:hover {
-  background: rgba(255,255,255,0.2);
+
+nav {
+  margin-top: 10px;
 }
 
-/* 섹션 공통 */
-section {
-  padding: 40px 20px;
-  margin: 20px auto;
-  max-width: 900px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-/* 버튼 */
-.btn {
-  display: inline-block;
-  padding: 12px 20px;
-  margin: 12px;
-  background: #2196F3;
-  color: #fff;
-  text-decoration: none;
+nav button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
   border-radius: 8px;
+  cursor: pointer;
+  background: #4CAF50;
+  color: white;
   font-size: 16px;
-  transition: background 0.3s;
 }
-.btn:hover {
-  background: #1976d2;
-}
-
-/* 광고 */
-.ad {
-  background: #fffbe6;
-  border: 2px dashed #fbc02d;
-}
-.ad h2 {
-  color: #f57f17;
+nav button:hover {
+  background: #45a049;
 }
 
-/* 푸터 */
-footer {
-  background: #333;
-  color: #ccc;
-  padding: 15px;
-  font-size: 14px;
+main {
+  padding: 20px;
+}
+
+/* 탭 콘텐츠 기본 숨김 */
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+/* 광고 박스 */
+.adsbygoogle {
+  margin: 20px auto;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
-  header nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .btn {
-    width: 90%;
-    font-size: 18px;
-    padding: 14px;
+  #board-canvas {
+    width: 95vw;
+    height: 95vw;
   }
 }
