@@ -1,96 +1,78 @@
+/* 기본 설정 */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
   font-size: 16px;
-  background: #f9f9f9;
+  background: #f4f6f9;
+  color: #333;
 }
 
+h1, h2 {
+  margin: 0.6em 0;
+}
+
+/* 헤더 */
 header {
-  background: #333;
+  background: linear-gradient(90deg, #4CAF50, #2e7d32);
   color: white;
-  padding: 15px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
-h1 {
-  margin: 0.5em 0;
+/* 섹션 공통 */
+section {
+  padding: 30px 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-/* 버튼 공통 스타일 */
-.btn, button {
+/* 게임 시작 버튼 */
+.btn {
   display: inline-block;
   padding: 12px 20px;
-  margin: 10px 5px;
-  background: #4CAF50;
+  margin: 12px;
+  background: #2196F3;
   color: #fff;
   text-decoration: none;
   border-radius: 8px;
-  border: none;
-  cursor: pointer;
   font-size: 16px;
+  transition: background 0.3s;
 }
-.btn:hover, button:hover {
-  background: #45a049;
-}
-
-#board-canvas {
-  display: block;
-  margin: 20px auto;
-  max-width: 95vw;
-  height: auto;
-  border: 2px solid #000;
+.btn:hover {
+  background: #1976d2;
 }
 
-#controls {
-  margin: 15px 0;
-}
-
-#status {
-  margin: 15px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* 승진 오버레이 */
-#promo-overlay {
-  position: fixed;
-  top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-#promo-overlay.hidden {
-  display: none;
-}
-#promo-options {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  gap: 15px;
-}
-.promo-option {
-  font-size: 32px;
-  cursor: pointer;
-}
-
-/* 광고 영역 */
+/* 광고 섹션 */
 .ad {
-  margin: 20px auto;
-  max-width: 95%;
+  background: #fffbe6;
+  border: 2px dashed #fbc02d;
+}
+.ad h2 {
+  color: #f57f17;
+}
+
+/* 연락처 */
+.contact p {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+/* 푸터 */
+footer {
+  background: #333;
+  color: #ccc;
+  padding: 15px;
+  font-size: 14px;
 }
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
-  #board-canvas {
-    width: 95vw;
-    height: 95vw;
-  }
-
-  .btn, button {
+  .btn {
     width: 90%;
     font-size: 18px;
     padding: 14px;
