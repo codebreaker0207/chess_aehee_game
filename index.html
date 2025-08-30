@@ -5,30 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>aehee 게임 웹사이트</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- 구글 애드센스 (사용자님이 넣은 값 그대로) -->
+  <script async 
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8997409885408315"
+    crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
-    <h1>aehee 게임</h1>
-    <p>동아리에서 만든 게임들을 올리는 사이트입니다. 자유롭게 이용해주세요.</p>
+    <h1>🎮 aehee 게임</h1>
+    <p>동아리에서 만든 게임들을 모아둔 공간입니다.</p>
   </header>
 
   <main>
-    <section>
+    <!-- 게임 소개 -->
+    <section class="intro">
       <h2>게임 소개</h2>
-      <p>체스를 좋아하는 분들을 위해 제작된 웹 기반 체스 게임입니다.  
-      별도 설치 없이 바로 즐길 수 있으며, PC와 모바일 모두 최적화되어 있습니다.</p>
+      <p>
+        저희 동아리는 즐겁게 배우고 만드는 것을 목표로 합니다.<br>
+        체스를 좋아하는 분들을 위해 제작된 <strong>웹 기반 체스 게임</strong>과<br>
+        클래식한 <strong>테트리스 게임</strong>을 준비했습니다.<br>
+        별도 설치 없이 PC와 모바일에서 바로 즐기실 수 있습니다.
+      </p>
     </section>
 
-    <section>
-      <h2>게임 시작하기</h2>
-      <a href="game.html" class="btn">▶ 체스 게임 플레이</a>
-      <a href="tetris/index.html" class="btn">▶ 테트리스 플레이</a>
-    </section>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8997409885408315"
-     crossorigin="anonymous"></script>
     <!-- 광고 영역 -->
-    
     <section class="ad">
+      <h2>스폰서</h2>
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-xxxxxxxxxx"
@@ -37,10 +40,24 @@
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
+
+    <!-- 게임 시작 -->
+    <section class="games">
+      <h2>게임 시작하기</h2>
+      <a href="game.html" class="btn">▶ 체스 게임 플레이</a>
+      <a href="tetris/index.html" class="btn">▶ 테트리스 플레이</a>
+    </section>
+
+    <!-- 연락처 -->
+    <section class="contact">
+      <h2>연락처</h2>
+      <p>문의사항이나 제안은 아래 메일로 보내주세요.</p>
+      <p><strong>Email:</strong> aehee_game@example.com</p>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Chess Game. All rights reserved.</p>
+    <p>&copy; 2025 aehee 게임. All rights reserved.</p>
   </footer>
 </body>
 </html>
