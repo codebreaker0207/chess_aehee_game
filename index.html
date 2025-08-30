@@ -3,72 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>aehee 게임 웹사이트</title>
+  <title>체스 게임 웹사이트</title>
   <link rel="stylesheet" href="style.css">
-  <script async 
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8997409885408315"
-    crossorigin="anonymous"></script>
+  <!-- 구글 광고 스크립트 (당신이 받은 코드 그대로 두시면 됩니다) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXX"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- 상단 네비게이션 -->
   <header>
-    <h1>🎮 aehee 게임</h1>
+    <h1>체스 게임 웹사이트</h1>
     <nav>
-      <ul>
-        <li><a href="#intro">게임 소개</a></li>
-        <li><a href="#games">게임</a></li>
-        <li><a href="#contact">연락처</a></li>
-        <li><a href="#email">이메일</a></li>
-      </ul>
+      <button class="tab-btn" data-tab="intro">게임 소개</button>
+      <button class="tab-btn" data-tab="play">게임 시작</button>
+      <button class="tab-btn" data-tab="contact">연락처</button>
     </nav>
   </header>
 
   <main>
-    <!-- 게임 소개 -->
-    <section id="intro" class="intro">
+    <section id="intro" class="tab-content active">
       <h2>게임 소개</h2>
-      <p>
-        저희 동아리는 즐겁게 배우고 만드는 것을 목표로 합니다.<br>
-        체스를 좋아하는 분들을 위해 제작된 <strong>웹 기반 체스 게임</strong>과<br>
-        클래식한 <strong>테트리스 게임</strong>을 준비했습니다.<br>
-        별도 설치 없이 PC와 모바일에서 바로 즐기실 수 있습니다.
-      </p>
-    </section>
-
-    <!-- 광고 영역 -->
-    <section class="ad">
-      <h2>스폰서</h2>
+      <p>이 게임은 체스 규칙을 기반으로 한 웹 체스 게임입니다.<br>
+         웹 브라우저에서 바로 즐길 수 있으며, 모바일에서도 대응됩니다.</p>
       <ins class="adsbygoogle"
            style="display:block"
-           data-ad-client="ca-pub-xxxxxxxxxx"
-           data-ad-slot="1234567890"
+           data-ad-client="ca-pub-XXXXXXX"
+           data-ad-slot="YYYYYYY"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <!-- 게임 시작 -->
-    <section id="games" class="games">
-      <h2>게임 시작하기</h2>
-      <a href="game.html" class="btn">▶ 체스 게임 플레이</a>
-      <a href="tetris/index.html" class="btn">▶ 테트리스 플레이</a>
+    <section id="play" class="tab-content">
+      <h2>게임 시작</h2>
+      <canvas id="board-canvas" width="400" height="400"></canvas>
+      <div id="controls">
+        <button>되돌리기</button>
+        <button>다시 시작</button>
+      </div>
+      <p id="status">게임을 시작하세요!</p>
     </section>
 
-    <!-- 연락처 -->
-    <section id="contact" class="contact">
+    <section id="contact" class="tab-content">
       <h2>연락처</h2>
-      <p>문의사항이나 제안은 아래 메일로 보내주세요.</p>
-    </section>
-
-    <!-- 이메일 -->
-    <section id="email" class="email">
-      <h2>이메일</h2>
-      <p><strong>Email:</strong> aehee_game@example.com</p>
+      <p>문의: yourmail@example.com</p>
+      <p>제작자: 박도현</p>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 aehee 게임. All rights reserved.</p>
-  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
