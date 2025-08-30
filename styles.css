@@ -9,21 +9,43 @@ body {
   color: #333;
 }
 
-h1, h2 {
-  margin: 0.6em 0;
-}
-
 /* 헤더 */
 header {
   background: linear-gradient(90deg, #4CAF50, #2e7d32);
   color: white;
-  padding: 20px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+header h1 {
+  margin: 0.5em 0;
+}
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+header nav ul li {
+  display: inline;
+}
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+header nav ul li a:hover {
+  background: rgba(255,255,255,0.2);
 }
 
 /* 섹션 공통 */
 section {
-  padding: 30px 20px;
+  padding: 40px 20px;
   margin: 20px auto;
   max-width: 900px;
   background: white;
@@ -31,7 +53,7 @@ section {
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-/* 게임 시작 버튼 */
+/* 버튼 */
 .btn {
   display: inline-block;
   padding: 12px 20px;
@@ -47,19 +69,13 @@ section {
   background: #1976d2;
 }
 
-/* 광고 섹션 */
+/* 광고 */
 .ad {
   background: #fffbe6;
   border: 2px dashed #fbc02d;
 }
 .ad h2 {
   color: #f57f17;
-}
-
-/* 연락처 */
-.contact p {
-  font-size: 15px;
-  margin: 5px 0;
 }
 
 /* 푸터 */
@@ -72,6 +88,10 @@ footer {
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
   .btn {
     width: 90%;
     font-size: 18px;
