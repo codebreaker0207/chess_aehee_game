@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  font-size: 16px;
+  background: #f9f9f9;
 }
 
 header {
@@ -15,14 +17,21 @@ h1 {
   margin: 0.5em 0;
 }
 
-.btn {
+/* 버튼 공통 스타일 */
+.btn, button {
   display: inline-block;
-  padding: 10px 20px;
-  margin: 10px 0;
+  padding: 12px 20px;
+  margin: 10px 5px;
   background: #4CAF50;
   color: #fff;
   text-decoration: none;
   border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.btn:hover, button:hover {
+  background: #45a049;
 }
 
 #board-canvas {
@@ -34,25 +43,13 @@ h1 {
 }
 
 #controls {
-  margin: 10px 0;
-}
-
-button {
-  padding: 10px 15px;
-  margin: 0 5px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-button:hover {
-  background: #45a049;
+  margin: 15px 0;
 }
 
 #status {
   margin: 15px;
   font-size: 18px;
+  font-weight: bold;
 }
 
 /* 승진 오버레이 */
@@ -63,6 +60,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 #promo-overlay.hidden {
   display: none;
@@ -79,10 +77,22 @@ button:hover {
   cursor: pointer;
 }
 
+/* 광고 영역 */
+.ad {
+  margin: 20px auto;
+  max-width: 95%;
+}
+
 /* 모바일 대응 */
 @media (max-width: 768px) {
   #board-canvas {
     width: 95vw;
     height: 95vw;
+  }
+
+  .btn, button {
+    width: 90%;
+    font-size: 18px;
+    padding: 14px;
   }
 }
