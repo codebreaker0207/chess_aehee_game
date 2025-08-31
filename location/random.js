@@ -1,73 +1,57 @@
-const students = [];
+// Firebase Firestore 가져오기
+import { getFirestore, collection, addDoc, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-const nameInput = document.getElementById('nameInput');
-const genderInput = document.getElementById('genderInput');
-const addStudentBtn = document.getElementById('addStudentBtn');
-const studentList = document.getElementById('studentList');
-const generateGroupsBtn = document.getElementById('generateGroupsBtn');
-const groupResult = document.getElementById('groupResult');
+const db = getFirestore();
+const auth = getAuth();
+
+let currentUser = null;
+
+// 로그인 상태 확인
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    currentUser = user;
+    console.log("로그인됨:", user.uid);
+    loadStudents(); // 로그인 시 학생 명단 불러오기
+  } else {
+    currentUser = null;
+    console.log("로그아웃 상태");
+  }
+});
 
 // 학생 추가
-addStudentBtn.addEventListener('click', () => {
-    const name = nameInput.value.trim();
-    const gender = genderInput.value;
-    if(name === "") return alert("이름을 입력하세요.");
-    
-    students.push({name, gender});
-    renderStudentList();
-    nameInput.value = '';
+document.getElementById("addStudentBtn").addEventListener("click", async () => {
+  if (!currentUser) {
+    alert("로그인이 필요합니다!");
+    return;
+  }
+
+  const name = document.getElementById("nameInput").value;
+  const gender = document.getElementById("genderInput").value;
+
+  if (name.trim() === "") return;
+
+  await addDoc(collection(db, "users", currentUser.uid, "students"), {
+    name: name,
+    gender: gender
+  });
+
+  document.getElementById("nameInput").value = "";
+  loadStudents();
 });
 
-// 학생 명단 렌더링
-function renderStudentList() {
-    studentList.innerHTML = '';
-    students.forEach((s, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${s.name} (${s.gender})`;
-        studentList.appendChild(li);
-    });
-}
+// 학생 불러오기
+async function loadStudents() {
+  if (!currentUser) return;
 
-// 모둠 생성
-generateGroupsBtn.addEventListener('click', () => {
-    if(students.length === 0) return alert("학생을 추가하세요.");
+  const querySnapshot = await getDocs(collection(db, "users", currentUser.uid, "students"));
+  const studentList = document.getElementById("studentList");
+  studentList.innerHTML = "";
 
-    const maleStudents = students.filter(s => s.gender === "남");
-    const femaleStudents = students.filter(s => s.gender === "여");
-
-    shuffleArray(maleStudents);
-    shuffleArray(femaleStudents);
-
-    const allStudents = [];
-    while(maleStudents.length > 0 || femaleStudents.length > 0) {
-        if(maleStudents.length > 0) allStudents.push(maleStudents.pop());
-        if(femaleStudents.length > 0) allStudents.push(femaleStudents.pop());
-    }
-
-    const groups = [];
-    for(let i = 0; i < allStudents.length; i += 4) {
-        groups.push(allStudents.slice(i, i + 4));
-    }
-
-    displayGroups(groups);
-});
-
-// 배열 섞기
-function shuffleArray(array) {
-    for(let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-// 모둠 결과 출력
-function displayGroups(groups) {
-    groupResult.innerHTML = '';
-    groups.forEach((group, index) => {
-        const div = document.createElement('div');
-        div.classList.add('group');
-        div.innerHTML = `<strong>모둠 ${index + 1}</strong><br>` +
-            group.map(s => `${s.name} (${s.gender})`).join('<br>');
-        groupResult.appendChild(div);
-    });
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    const li = document.createElement("li");
+    li.textContent = `${data.name} (${data.gender})`;
+    studentList.appendChild(li);
+  });
 }
