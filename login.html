@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 - aehee.com</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>aehee 로그인 페이지</h1>
+    <nav>
+      <a href="index.html">홈으로</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="login-section">
+      <h2>회원가입</h2>
+      <input type="email" id="signup-email" placeholder="이메일 입력"><br>
+      <input type="password" id="signup-password" placeholder="비밀번호 입력"><br>
+      <button id="signupBtn">회원가입</button>
+
+      <h2>로그인</h2>
+      <input type="email" id="login-email" placeholder="이메일 입력"><br>
+      <input type="password" id="login-password" placeholder="비밀번호 입력"><br>
+      <button id="loginBtn">로그인</button>
+
+      <h2>현재 상태</h2>
+      <p id="user-info">로그인 안 됨</p>
+      <button id="logoutBtn">로그아웃</button>
+    </section>
+  </main>
+
+  <script type="module" src="firebase-auth.js"></script>
+</body>
+</html>
