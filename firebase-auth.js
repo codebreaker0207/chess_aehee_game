@@ -15,6 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// 메뉴 버튼 선택
 const authBtn = document.getElementById("authBtn");
 
 // 버튼 클릭 시 동작
@@ -36,10 +37,12 @@ authBtn.addEventListener("click", () => {
   }
 });
 
-// 로그인 상태 변경 시 버튼 텍스트 변경
+// 로그인 상태 변경 시 버튼 텍스트를 UID로 표시
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    authBtn.textContent = "로그아웃";
+    // 익명 로그인이면 UID, 이메일 로그인이면 user.email
+    const displayName = user.isAnonymous ? "익명-" + user.uid.slice(0, 6) : user.email;
+    authBtn.textContent = displayName;
   } else {
     authBtn.textContent = "로그인";
   }
