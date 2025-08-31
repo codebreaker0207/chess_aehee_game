@@ -10,6 +10,29 @@
      crossorigin="anonymous"></script>
 </head>
 <body>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDfGn5OYurP78rYRQTBnS_9QOkMCMwQhok",
+    authDomain: "aehee-c1b18.firebaseapp.com",
+    projectId: "aehee-c1b18",
+    storageBucket: "aehee-c1b18.firebasestorage.app",
+    messagingSenderId: "843166194124",
+    appId: "1:843166194124:web:87f1b8308ced5f060f2569",
+    measurementId: "G-TL6NZ0S78F"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
   <header>
     <h1>aehee 게임 웹사이트</h1>
     <nav>
