@@ -5,104 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>aehee 게임 웹사이트</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- 구글 광고 스크립트 (당신이 받은 코드 그대로 두시면 됩니다) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8997409885408315"
      crossorigin="anonymous"></script>
 </head>
 <body>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDfGn5OYurP78rYRQTBnS_9QOkMCMwQhok",
-    authDomain: "aehee-c1b18.firebaseapp.com",
-    projectId: "aehee-c1b18",
-    storageBucket: "aehee-c1b18.firebasestorage.app",
-    messagingSenderId: "843166194124",
-    appId: "1:843166194124:web:87f1b8308ced5f060f2569",
-    measurementId: "G-TL6NZ0S78F"
-  };
+<header>
+  <h1>aehee 게임 웹사이트</h1>
+  <nav>
+    <button class="tab-btn" data-tab="intro">게임 소개</button>
+    <button class="tab-btn" data-tab="play">aehee게임</button>
+    <button class="tab-btn" data-tab="school">교과도우미</button>
+    <button class="tab-btn" data-tab="contact">연락처</button>
+    <!-- 로그인 버튼 추가 -->
+    <a href="login.html" class="tab-btn">로그인</a>
+  </nav>
+</header>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-  <header>
-    <h1>aehee 게임 웹사이트</h1>
-    <nav>
-      <button class="tab-btn" data-tab="intro">게임 소개</button>
-      <button class="tab-btn" data-tab="play">aehee게임</button>
-      <button class="tab-btn" data-tab="school">교과도우미</button>
-      <button class="tab-btn" data-tab="contact">연락처</button>
-    </nav>
-  </header>
+<main>
+  <!-- 기존 섹션: intro, play, school, contact -->
+  <section id="intro" class="tab-content active">
+    <h2>aehee 소개</h2>
+    <p>...내용 생략...</p>
+    <p>이 이야기는 먼 옛날 2024년 4월경으로 돌아간다..<br>
+      정보동아리는 우리 학교의 위대하신 선생님의 의해 개설되어<br>
+      정보동아리의 시작을 맞이한다.<br>
+      이후 우리 동아리는 파이썬이라는 언어를 배우게 되는데....<br>
+      이때 우리는 여러가지를 배우며 성장을 하게 되어......<br>
+      하지만 결국 2학기에 들어서 어떠한 이유로 해체의 길을 맞게 된다.<br>
+      그리고 개학후 우리들은 다시모여 정보 동아리를 개설하게 된다.<br>
+      2025년도에 다시 동아리를 개설한뒤 파이썬에 대해 학습하다....<br>
+      파이게임이라는 것을 알게 되어<br>
+      방학때 단기로 매주 만나 임시로 배우게 되고.....<br>
+      이를 공부하다 우리가 만든 것을 올리고 싶어져....<br>
+      웹사이트, 즉 html을 배우게 된다...<br>
+      결국 웹사이트로 방향성을 잡아.....<br>
+      많다고 하면 많은 적다고 하면 적은 시행착오를 겪으며<br>
+      aehee.com이라는 사이트가 만들어지게 된다.</p>
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXX"
+      data-ad-slot="YYYYYYY" 
+      data-ad-format="auto" 
+      data-full-width-responsive="true"></ins> 
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </section>
+  <section id="play" class="tab-content">
+    <h2>aehee game</h2>
+    <canvas id="board-canvas" width="400" height="400"></canvas>
+    <div id="controls">
+      <a href="game.html" class="btn">▶ 체스 게임 플레이</a>
+      <a href="tetris/index.html" class="btn">▶ 테트리스 플레이</a>
+    </div>
+    <p id="status">aehee의 의한 창작물</p>
+  </section>
+  <section id="school" class="tab-content">
+    <h2>교과도우미</h2>
+    <div id="controls">
+      <a href="location/index.html" class="btn">모둠 배정</a>
+    </div>
+  </section>
+  <section id="contact" class="tab-content">
+    <h2>연락처</h2>
+    <p>...내용 생략...</p>
+  </section>
+</main>
 
-  <main>
-    <section id="intro" class="tab-content active">
-      <h2>aehee(정보동아리) 소개</h2>
-      <p>이 이야기는 먼 옛날 2024년 4월경으로 돌아간다..<br>
-        정보동아리는 우리 학교의 위대하신 선생님의 의해 개설되어<br>
-        정보동아리의 시작을 맞이한다.<br>
-        이후 우리 동아리는 파이썬이라는 언어를 배우게 되는데....<br>
-        이때 우리는 여러가지를 배우며 성장을 하게 되어......<br>
-        하지만 결국 2학기에 들어서 어떠한 이유로 해체의 길을 맞게 된다.<br>
-        그리고 개학후 우리들은 다시모여 정보 동아리를 개설하게 된다.<br>
-        2025년도에 다시 동아리를 개설한뒤 파이썬에 대해 학습하다....<br>
-        파이게임이라는 것을 알게 되어<br>
-        방학때 단기로 매주 만나 임시로 배우게 되고.....<br>
-        이를 공부하다 우리가 만든 것을 올리고 싶어져....<br>
-        웹사이트, 즉 html을 배우게 된다...<br>
-        결국 웹사이트로 방향성을 잡아.....<br>
-        많다고 하면 많은 적다고 하면 적은 시행착오를 겪으며<br>
-         aehee.com이라는 사이트가 만들어지게 된다.</p>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-XXXXXXX"
-           data-ad-slot="YYYYYYY"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </section>
-
-    <section id="play" class="tab-content">
-      <h2>aehee game</h2>
-      <canvas id="board-canvas" width="400" height="400"></canvas>
-      <div id="controls">
-        <a href="game.html" class="btn">▶ 체스 게임 플레이</a>
-      </div>
-      <div id="controls">
-        <a href="tetris/index.html" class="btn">▶ 테트리스 플레이</a>
-      </div>
-      <p id="status">aehee의 의한 창작물</p>
-    </section>
-
-    <section id="school" class="tab-content">
-      <h2>교과도우미</h2>
-      <div id="controls">
-        <a href="location/index.html" class="btn">모둠 배정</a>
-      </div>
-    </section>
-
-    <section id="contact" class="tab-content">
-      <h2>연락처</h2>
-      <p>전화번호는 안알려줌</p>
-      <p>문의: bage57393@gmail.com</p>
-      <p>지원:정보선생님</p>
-      <p>제작자: 박도현, 원도현, 김준민</p>
-      <p>기획자: 원도현, 김민재, 김준민</p>
-      <p>프로그램 제작자: 권이현, 한준서</p>
-      <P>디자이너: 김민재, 박지후, 박수민</P>
-      <p>홍보:이예준, 김민재</p>
-      <p>조력: 김예준</p>
-    </section>
-  </main>
-
-  <script src="menu.js"></script>
+<script src="menu.js"></script>
 </body>
 </html>
