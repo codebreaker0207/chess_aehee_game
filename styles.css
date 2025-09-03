@@ -5,6 +5,17 @@ body {
   text-align: center;
 }
 
+#upgradeUi {
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999; /* 다른 UI 위로 오게 */
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 header {
   background: #333;
   color: white;
