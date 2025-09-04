@@ -30,7 +30,7 @@ header h1 {
 
 header img {
   position: absolute;
-  left: 10px;
+  left: 5%;
   top: 50%;
   transform: translateY(-50%);
 }
