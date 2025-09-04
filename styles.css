@@ -10,7 +10,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 999; /* 다른 UI 위로 오게 */
+  z-index: 999; /* 다른 UI 위로 오게 1*/
   background: #fff;
   padding: 20px;
   border-radius: 10px;
