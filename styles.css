@@ -87,7 +87,7 @@ main {
 }
 
 /* 모바일 대응 */
-@media (max-width: 768px) {
+@media (max-width: 425px) {
   #board-canvas {
     width: 95vw;
     height: 95vw;
