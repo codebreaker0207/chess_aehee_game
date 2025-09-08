@@ -5,27 +5,28 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f0f8ff;
+    background-color: #f0f8ff;
 }
 
 .container {
     text-align: center;
-    background: #fff;
-    padding: 30px 50px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+canvas {
+    background-color: #222;
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #555;
 }
 
 button {
-    padding: 15px 30px;
-    margin: 10px;
-    font-size: 18px;
+    padding: 10px 20px;
+    font-size: 16px;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     background-color: #1e90ff;
     color: white;
-    transition: 0.2s;
 }
 
 button:hover {
