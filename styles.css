@@ -24,7 +24,7 @@ header {
   height: 120px;
 }
 
-@media (max-width: 430px) {
+@media (min-width: 431px) {
   header h1 {
     margin: 0.4em 0;
   }
