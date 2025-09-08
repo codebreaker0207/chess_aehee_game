@@ -24,15 +24,34 @@ header {
   height: 120px;
 }
 
-header h1 {
-  margin: 0.4em 0;
+@media screen and (min-width: 768px) {
+  header h1 {
+    margin: 0.4em 0;
+  }
+
+  header img {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
-header img {
-  position: absolute;
-  left: 5%;
-  top: 50%;
-  transform: translateY(-50%);
+@media screen and (max-width: 425px) {
+  header h1 {
+    margin: 0.4em 0;
+    position: absolute;
+    right: 5%;
+    top: 25%;
+    transform: translateY(-50%);
+  }
+
+  header img {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 nav {
