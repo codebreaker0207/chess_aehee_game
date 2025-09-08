@@ -23,8 +23,8 @@ function initGame() {
 
 function generateFood() {
     food = {
-        x: Math.floor(Math.random() * 20) * box,
-        y: Math.floor(Math.random() * 20) * box
+        x: Math.floor(Math.random() * (canvas.width / box)) * box,
+        y: Math.floor(Math.random() * (canvas.height / box)) * box
     };
 }
 
@@ -59,7 +59,7 @@ function draw() {
     if (direction === "UP") headY -= box;
     if (direction === "DOWN") headY += box;
 
-    // 벽 통과 처리
+    // 벽 통과: 그냥 넘어가게 함
     if (headX >= canvas.width) headX = 0;
     if (headX < 0) headX = canvas.width - box;
     if (headY >= canvas.height) headY = 0;
