@@ -97,6 +97,11 @@ main {
     top: 10%;
     transform: translateY(-50%);
   }
+  
+  header img {
+    float: left;
+  }
+  
   nav button {
     padding: 5px 10px;
     margin: 2.5px;
