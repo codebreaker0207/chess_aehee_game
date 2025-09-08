@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>클릭 게임</title>
+    <title>지렁이 게임</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>클릭 게임</h1>
-        <p>남은 시간: <span id="time">60</span>초</p>
+        <h1>지렁이 게임</h1>
         <p>점수: <span id="score">0</span></p>
-        <button id="clickBtn">클릭!</button>
-        <button id="restartBtn" style="display:none;">다시 시작</button>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <button id="restartBtn">다시 시작</button>
     </div>
     <script src="script.js"></script>
 </body>
