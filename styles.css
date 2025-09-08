@@ -94,4 +94,14 @@ main {
     top: 10%;
     transform: translateY(-50%);
   }
+  nav button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: none;
+    color: white;
+    font-size: 16px;
+  }
 }
