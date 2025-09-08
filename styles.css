@@ -97,10 +97,7 @@ main {
 
   header h1 {
     font-size: small;
-    position: absolute;
-    right: 5%;
-    top: 10%;
-    transform: translateY(-50%);
+    float: right;
   }
   
   header img {
