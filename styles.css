@@ -29,7 +29,10 @@ header h1 {
 }
 
 header img {
-  float: left;
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 
