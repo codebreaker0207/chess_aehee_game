@@ -60,7 +60,7 @@ main {
   padding: 20px;
 }
 
-main a {
+.login {
   position: absolute;
   right: 5%;
   transform: translateY(-50%);
