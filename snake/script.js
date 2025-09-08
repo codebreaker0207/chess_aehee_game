@@ -59,6 +59,12 @@ function draw() {
     if (direction === "UP") headY -= box;
     if (direction === "DOWN") headY += box;
 
+    // 벽 통과 처리
+    if (headX >= canvas.width) headX = 0;
+    if (headX < 0) headX = canvas.width - box;
+    if (headY >= canvas.height) headY = 0;
+    if (headY < 0) headY = canvas.height - box;
+
     // 먹이 먹었는지 확인
     if (headX === food.x && headY === food.y) {
         score++;
@@ -70,8 +76,8 @@ function draw() {
 
     let newHead = {x: headX, y: headY};
 
-    // 충돌 체크
-    if (headX < 0 || headY < 0 || headX >= canvas.width || headY >= canvas.height || collision(newHead, snake)) {
+    // 자기 몸에 부딪히면 게임 종료
+    if (collision(newHead, snake)) {
         clearInterval(gameInterval);
         alert("게임 종료! 점수: " + score);
         return;
