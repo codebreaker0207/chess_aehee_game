@@ -108,13 +108,13 @@ main {
   }
   
   nav button {
-    padding: 10px 20px;
-    margin: 5px;
+    padding: 7px 14px;
+    margin: 3px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     background: none;
     color: white;
-    font-size: 16px;
+    font-size: 12px;
   }
 }
