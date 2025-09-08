@@ -60,6 +60,12 @@ main {
   padding: 20px;
 }
 
+main a {
+  position: absolute;
+  right: 5%;
+  transform: translateY(-50%);
+}
+
 /* 탭 콘텐츠 기본 숨김 */
 .tab-content {
   display: none;
