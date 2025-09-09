@@ -62,11 +62,7 @@ main {
   padding: 20px;
 }
 
-.web {
-  position: absolute;
-  right: 5%;
-  transform: translateY(-50%);
-}
+/* .web {position: absolute;right: 5%;transform: translateY(-50%);} */
 
 /* 탭 콘텐츠 기본 숨김 */
 .tab-content {
