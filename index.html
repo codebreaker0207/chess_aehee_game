@@ -97,47 +97,5 @@
 </main>
 
 <script src="menu.js"></script>
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } 
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  const firebaseConfig = {
-    apiKey: "AIzaSyDfGn5OYurP78rYRQTBnS_9QOkMCMwQhok",
-    authDomain: "aehee-c1b18.firebaseapp.com",
-    projectId: "aehee-c1b18",
-    storageBucket: "aehee-c1b18.firebasestorage.app",
-    messagingSenderId: "843166194124",
-    appId: "1:843166194124:web:87f1b8308ced5f060f2569",
-    measurementId: "G-TL6NZ0S78F"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // 로그인 상태 체크
-  onAuthStateChanged(auth, (user) => {
-    const loginLink = document.getElementById("loginLink");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const userInfo = document.getElementById("userInfo");
-
-    if (user) {
-      // 로그인된 상태
-      loginLink.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-      userInfo.textContent = "안녕하세요, " + user.email;
-    } else {
-      // 로그아웃된 상태
-      loginLink.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-      userInfo.textContent = "";
-    }
-  });
-
-  // 로그아웃 처리
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await signOut(auth);
-    alert("로그아웃 완료");
-  });
-</script>
 </body>
 </html>
