@@ -2,32 +2,76 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인 - aehee.com</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>로그인</title>
 </head>
 <body>
-  <header>
-    <h1>aehee 로그인 페이지</h1>
-    <nav>
-      <a href="index.html">홈으로</a>
-    </nav>
-  </header>
+  <h2>로그인 / 회원가입</h2>
+  <input type="email" id="email" placeholder="이메일"><br>
+  <input type="password" id="password" placeholder="비밀번호"><br>
+  <button id="signupBtn">회원가입</button>
+  <button id="loginBtn">로그인</button>
+  <hr>
+  <button id="googleLoginBtn">구글로 로그인</button>
 
-  <main>
-    <section id="login-section">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword, 
+      signInWithPopup, 
+      GoogleAuthProvider 
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-      <h2>로그인</h2>
-      <input type="email" id="login-email" placeholder="이메일 입력"><br>
-      <input type="password" id="login-password" placeholder="비밀번호 입력"><br>
-      <button id="loginBtn">로그인</button>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
 
-      <h2>현재 상태</h2>
-      <p id="user-info">로그인 안 됨</p>
-      <button id="logoutBtn">로그아웃</button>
-    </section>
-  </main>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
-  <script type="module" src="firebase-auth.js"></script>
+    // 회원가입
+    document.getElementById("signupBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("회원가입 성공!");
+        window.location.href = "index.html";
+      } catch (e) {
+        alert("회원가입 실패: " + e.message);
+      }
+    });
+
+    // 로그인
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("로그인 성공!");
+        window.location.href = "index.html";
+      } catch (e) {
+        alert("로그인 실패: " + e.message);
+      }
+    });
+
+    // 구글 로그인
+    document.getElementById("googleLoginBtn").addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        alert("구글 로그인 성공!");
+        window.location.href = "index.html";
+      } catch (e) {
+        alert("구글 로그인 실패: " + e.message);
+      }
+    });
+  </script>
 </body>
 </html>
