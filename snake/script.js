@@ -1,3 +1,5 @@
+// script.js
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const scoreDisplay = document.getElementById("score");
@@ -11,7 +13,7 @@ let direction;
 let gameInterval;
 
 function initGame() {
-    snake = [{x: 8 * box, y: 8 * box}];
+    snake = [{ x: 8 * box, y: 8 * box }];
     direction = "RIGHT";
     score = 0;
     scoreDisplay.textContent = score;
@@ -29,7 +31,7 @@ function generateFood() {
 }
 
 // 키보드 입력
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
     if (event.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
     if (event.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
@@ -59,13 +61,13 @@ function draw() {
     if (direction === "UP") headY -= box;
     if (direction === "DOWN") headY += box;
 
-    // 벽 통과: 그냥 넘어가게 함
+    // 벽 통과
     if (headX >= canvas.width) headX = 0;
     if (headX < 0) headX = canvas.width - box;
     if (headY >= canvas.height) headY = 0;
     if (headY < 0) headY = canvas.height - box;
 
-    // 먹이 먹었는지 확인
+    // 먹이 먹기
     if (headX === food.x && headY === food.y) {
         score++;
         scoreDisplay.textContent = score;
@@ -74,9 +76,9 @@ function draw() {
         snake.pop(); // 꼬리 제거
     }
 
-    let newHead = {x: headX, y: headY};
+    let newHead = { x: headX, y: headY };
 
-    // 자기 몸에 부딪히면 게임 종료
+    // 자기 자신과 충돌
     if (collision(newHead, snake)) {
         clearInterval(gameInterval);
         alert("게임 종료! 점수: " + score);
@@ -96,3 +98,31 @@ function collision(head, array) {
 restartBtn.addEventListener("click", initGame);
 
 initGame();
+
+// 모바일 스와이프 제어
+let touchStartX = 0;
+let touchStartY = 0;
+
+canvas.addEventListener("touchstart", function (e) {
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+});
+
+canvas.addEventListener("touchend", function (e) {
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+
+    const threshold = 30;
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+        // 좌우
+        if (dx > 0 && direction !== "LEFT") direction = "RIGHT";
+        else if (dx < 0 && direction !== "RIGHT") direction = "LEFT";
+    } else if (Math.abs(dy) > threshold) {
+        // 상하
+        if (dy > 0 && direction !== "UP") direction = "DOWN";
+        else if (dy < 0 && direction !== "DOWN") direction = "UP";
+    }
+});
