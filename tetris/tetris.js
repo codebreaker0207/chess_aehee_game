@@ -1,3 +1,18 @@
+<canvas id="board"></canvas>
+<canvas id="next" width="96" height="96"></canvas>
+<div>
+  점수: <span id="score">0</span><br>
+  줄: <span id="lines">0</span><br>
+  레벨: <span id="level">1</span>
+</div>
+<button id="startBtn">시작</button>
+<button id="pauseBtn">일시정지</button>
+<button id="mLeft">◀</button>
+<button id="mRight">▶</button>
+<button id="mRotate">⟳</button>
+<button id="mDown">▼</button>
+
+<script>
 (function(){
   const canvas=document.getElementById('board');
   const ctx=canvas.getContext('2d');
@@ -83,17 +98,64 @@
   function playerMove(dir){player.pos.x+=dir; if(collide(arena,player)) player.pos.x-=dir;}
   function playerRotate(){const pos=player.pos.x; player.matrix=rotate(player.matrix); let offset=1; while(collide(arena,player)){player.pos.x+=offset; offset=-(offset+(offset>0?1:-1)); if(offset>player.matrix[0].length){player.matrix=rotate(rotate(rotate(player.matrix))); player.pos.x=pos; return;}}}
 
+  // 🔹 블록 그리기 (음영 포함)
+  function drawBlock(x,y,color){
+    ctx.fillStyle=color;
+    ctx.fillRect(x,y,scale,scale);
+
+    // 테두리 효과 (3D 느낌)
+    ctx.strokeStyle="#000";
+    ctx.lineWidth=1;
+    ctx.strokeRect(x,y,scale,scale);
+
+    // 밝은 하이라이트
+    ctx.beginPath();
+    ctx.strokeStyle="rgba(255,255,255,0.6)";
+    ctx.moveTo(x,y+scale);
+    ctx.lineTo(x,y);
+    ctx.lineTo(x+scale,y);
+    ctx.stroke();
+
+    // 어두운 그림자
+    ctx.beginPath();
+    ctx.strokeStyle="rgba(0,0,0,0.4)";
+    ctx.moveTo(x+scale,y);
+    ctx.lineTo(x+scale,y+scale);
+    ctx.lineTo(x,y+scale);
+    ctx.stroke();
+  }
+
   function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    // 🔹 격자선
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 0.5;
+    for(let x=0;x<=cols;x++){
+      ctx.beginPath();
+      ctx.moveTo(x*scale,0);
+      ctx.lineTo(x*scale,canvas.height);
+      ctx.stroke();
+    }
+    for(let y=0;y<=rows;y++){
+      ctx.beginPath();
+      ctx.moveTo(0,y*scale);
+      ctx.lineTo(canvas.width,y*scale);
+      ctx.stroke();
+    }
+
+    // arena
     for(let y=0;y<arena.length;y++){
       for(let x=0;x<arena[y].length;x++){
         const val=arena[y][x];
-        if(val){ctx.fillStyle=COLORS[val]; ctx.fillRect(x*scale,y*scale,scale-1,scale-1);}
+        if(val){ drawBlock(x*scale,y*scale,COLORS[val]); }
       }
     }
-    player.matrix.forEach((row,y)=>{
-      row.forEach((val,x)=>{
-        if(val){ctx.fillStyle=COLORS[val]; ctx.fillRect((x+player.pos.x)*scale,(y+player.pos.y)*scale,scale-1,scale-1);}
+
+    // player
+    player.matrix.forEach((row,yy)=>{
+      row.forEach((val,xx)=>{
+        if(val){ drawBlock((xx+player.pos.x)*scale,(yy+player.pos.y)*scale,COLORS[val]); }
       });
     });
   }
@@ -103,7 +165,12 @@
     const size=next.matrix.length; const tile=Math.floor(nextCanvas.width/size);
     for(let y=0;y<size;y++) for(let x=0;x<size;x++){
       const v=next.matrix[y][x];
-      if(v){nextCtx.fillStyle=COLORS[v]; nextCtx.fillRect(x*tile,y*tile,tile-2,tile-2);}
+      if(v){
+        nextCtx.fillStyle=COLORS[v];
+        nextCtx.fillRect(x*tile,y*tile,tile-2,tile-2);
+        nextCtx.strokeStyle="#000";
+        nextCtx.strokeRect(x*tile,y*tile,tile-2,tile-2);
+      }
     }
   }
 
@@ -138,3 +205,4 @@
 
   playerReset(); updateHUD(); update();
 })();
+</script>
