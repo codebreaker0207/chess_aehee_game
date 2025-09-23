@@ -1,49 +1,192 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPS 테스트</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CPS 측정기 + 실시간 그래프</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 2em;
+      font-family: sans-serif;
+      background: #f5f5f5;
+    }
+    h1 { margin-bottom: 0.5em; }
+    select, button {
+      font-size: 1rem;
+      padding: 0.5em 1em;
+      margin: 0.5em;
+    }
+    #click-area {
+      margin-top: 1em;
+      width: 300px;
+      height: 300px;
+      background: #fff;
+      border: 4px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    #click-area.disabled {
+      background: #ddd;
+      cursor: not-allowed;
+    }
+    #graph {
+      margin-top: 1.5em;
+      border: 1px solid #333;
+      background: #fff;
+    }
+    #results {
+      margin-top: 1em;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>CPS 테스트</h1>
-        
-        <!-- 시간 설정 입력 필드 -->
-        <label for="timeInput">테스트 시간 (초):</label>
-        <input type="number" id="timeInput" value="10" min="1" max="60">
-        
-        <button id="startBtn">시간 설정 후 클릭하세요!</button>
-        
-        <p id="timer">남은 시간: <span id="time">0</span>초</p>
-        <button id="clickBtn" disabled>여기를 클릭하세요!</button>
-        <p id="clickCount">클릭 횟수: 0</p>
-        <p id="cpsResult">CPS: 0</p>
-        
-        <!-- 그래프 표시 영역 -->
-        <canvas id="clickGraph" width="350" height="150"></canvas>
-    </div>
-    <script src="script.js"></script>
+  <h1>CPS 테스트 + 실시간 그래프</h1>
+
+  <div>
+    <label for="duration">측정 시간: </label>
+    <select id="duration">
+      <option value="1">1초</option>
+      <option value="3">3초</option>
+      <option value="5">5초</option>
+      <option value="10" selected>10초</option>
+      <option value="15">15초</option>
+      <option value="30">30초</option>
+      <option value="60">60초</option>
+    </select>
+    <button id="start-btn">시작</button>
+  </div>
+
+  <div id="click-area" class="disabled">클릭 준비</div>
+
+  <canvas id="graph" width="600" height="200"></canvas>
+
+  <div id="results"></div>
+
+  <script>
+    const startBtn = document.getElementById('start-btn');
+    const clickArea = document.getElementById('click-area');
+    const durationSelect = document.getElementById('duration');
+    const results = document.getElementById('results');
+    const canvas = document.getElementById('graph');
+    const ctx = canvas.getContext('2d');
+
+    let totalClicks = 0;
+    let prevTotal = 0;
+    let timeLeft = 0;
+    let duration = 0;
+    let timerId = null;
+    let secondIndex = 0;
+    const maxCps = 20;  // 그래프 y축 최대값
+
+    function resetCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // 축 그리기
+      ctx.strokeStyle = '#333';
+      ctx.beginPath();
+      ctx.moveTo(40, 10);
+      ctx.lineTo(40, canvas.height - 30);
+      ctx.lineTo(canvas.width - 10, canvas.height - 30);
+      ctx.stroke();
+      // y축 레이블
+      ctx.fillStyle = '#333';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      for (let i = 0; i <= maxCps; i += 5) {
+        const y = mapY(i);
+        ctx.fillText(i, 35, y);
+        ctx.beginPath();
+        ctx.moveTo(40, y);
+        ctx.lineTo(canvas.width - 10, y);
+        ctx.strokeStyle = '#eee';
+        ctx.stroke();
+        ctx.strokeStyle = '#333';
+      }
+    }
+
+    function mapX(sec) {
+      const plotWidth = canvas.width - 50;
+      return 40 + (plotWidth * sec / (duration - 1 || 1));
+    }
+
+    function mapY(value) {
+      const plotHeight = canvas.height - 40;
+      const pct = Math.min(value / maxCps, 1);
+      return canvas.height - 30 - (plotHeight * pct);
+    }
+
+    function updateClickArea(text, disabled) {
+      clickArea.textContent = text;
+      clickArea.classList.toggle('disabled', disabled);
+    }
+
+    function startTest() {
+      totalClicks = 0;
+      prevTotal = 0;
+      duration = parseInt(durationSelect.value, 10);
+      timeLeft = duration;
+      secondIndex = 0;
+      results.textContent = '';
+      startBtn.disabled = true;
+      durationSelect.disabled = true;
+
+      resetCanvas();
+
+      // 클릭 시작과 동시에 즉시 활성화
+      updateClickArea(timeLeft + '초 남음', false);
+
+      timerId = setInterval(() => {
+        timeLeft--;
+        // 1초 구간 클릭 수 계산 & 점 찍기
+        const clicksThisSec = totalClicks - prevTotal;
+        prevTotal = totalClicks;
+        const x = mapX(secondIndex);
+        const y = mapY(clicksThisSec);
+        ctx.fillStyle = '#d33';
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        secondIndex++;
+
+        if (timeLeft > 0) {
+          updateClickArea(timeLeft + '초 남음', false);
+        } else {
+          endTest();
+        }
+      }, 1000);
+    }
+
+    function endTest() {
+      clearInterval(timerId);
+      updateClickArea('테스트 종료', true);
+      const cps = (totalClicks / duration).toFixed(2);
+      results.innerHTML = `
+        총 클릭 수: <strong>${totalClicks}</strong><br/>
+        평균 CPS: <strong>${cps}</strong>
+      `;
+      startBtn.disabled = false;
+      durationSelect.disabled = false;
+      startBtn.textContent = '다시 시작';
+    }
+
+    clickArea.addEventListener('click', () => {
+      if (!clickArea.classList.contains('disabled')) {
+        totalClicks++;
+      }
+    });
+
+    startBtn.addEventListener('click', startTest);
+  </script>
 </body>
 </html>
-
