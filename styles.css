@@ -76,6 +76,13 @@ main {
   transform: translateY(-50%);
 }
 
+.towdo {
+  position: absolute;
+  top: 80%;
+  right: 41.5%;
+  transform: translateY(-50%);
+}
+
 .tab-content.active {
   display: block;
   animation: fadeIn 0.4s ease;
