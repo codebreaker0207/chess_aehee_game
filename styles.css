@@ -78,8 +78,8 @@ main {
 
 .towdo {
   position: absolute;
-  top: 80%;
-  right: 41.5%;
+  top: 87%;
+  right: 50%;
   transform: translateY(-50%);
 }
 
