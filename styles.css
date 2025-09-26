@@ -70,10 +70,7 @@ main {
 }
 
 .gamedownimg {
-  position: absolute;
-  top: 70%;
-  right: 41.5%;
-  transform: translateY(-50%);
+  float: none;
 }
 
 .towdo {
