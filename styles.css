@@ -69,17 +69,6 @@ main {
   display: none;
 }
 
-.gamedownimg {
-  float: none;
-}
-
-.towdo {
-  position: absolute;
-  top: 95%;
-  right: 45%;
-  transform: translateY(-50%);
-}
-
 .tab-content.active {
   display: block;
   animation: fadeIn 0.4s ease;
