@@ -53,6 +53,10 @@ header {
     color: white;
     font-size: 16px;
   }
+  nav button.active {
+    background: #4caf50;
+    color: #fff;
+  }
 }
 nav button:hover {
   background: #45a049;
@@ -110,5 +114,9 @@ main {
     background: none;
     color: white;
     font-size: 5%;
+  }
+  nav button.active {
+    background: #4caf50;
+    color: #fff;
   }
 }
