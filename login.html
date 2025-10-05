@@ -14,37 +14,39 @@
   <button id="googleLoginBtn">구글로 로그인</button>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { 
-      getAuth, 
-      createUserWithEmailAndPassword, 
-      signInWithEmailAndPassword, 
-      signInWithPopup, 
-      GoogleAuthProvider 
+   import {
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signInWithPopup,
+      GoogleAuthProvider,
+      onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { auth } from "./firebase-config.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDfGn5OYurP78rYRQTBnS_9QOkMCMwQhok",
-      authDomain: "aehee-c1b18.firebaseapp.com",
-      projectId: "aehee-c1b18",
-      storageBucket: "aehee-c1b18.firebasestorage.app",
-      messagingSenderId: "843166194124",
-      appId: "1:843166194124:web:87f1b8308ced5f060f2569",
-      measurementId: "G-TL6NZ0S78F"
+    const provider = new GoogleAuthProvider();
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const redirectToHome = () => {
+      window.location.href = "index.html";
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+    // 이미 로그인된 사용자는 홈으로 이동
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        redirectToHome();
+      }
+    });
 
     // 회원가입
     document.getElementById("signupBtn").addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const email = emailInput.value;
+      const password = passwordInput.value;
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         alert("회원가입 성공!");
-        window.location.href = "index.html";
+        redirectToHome();
       } catch (e) {
         alert("회원가입 실패: " + e.message);
       }
@@ -52,12 +54,12 @@
 
     // 로그인
     document.getElementById("loginBtn").addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const email = emailInput.value;
+      const password = passwordInput.value;
       try {
         await signInWithEmailAndPassword(auth, email, password);
         alert("로그인 성공!");
-        window.location.href = "index.html";
+       redirectToHome();
       } catch (e) {
         alert("로그인 실패: " + e.message);
       }
@@ -68,7 +70,7 @@
       try {
         await signInWithPopup(auth, provider);
         alert("구글 로그인 성공!");
-        window.location.href = "index.html";
+        redirectToHome();
       } catch (e) {
         alert("구글 로그인 실패: " + e.message);
       }
