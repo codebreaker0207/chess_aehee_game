@@ -43,7 +43,7 @@ header {
     margin-top: 10px;
   }
 
-  nav button {
+  nav .tab-btn {
     padding: 10px 20px;
     margin: 5px;
     border: none;
@@ -52,13 +52,15 @@ header {
     background: none;
     color: white;
     font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
   }
   nav button.active {
     background: #4caf50;
     color: #fff;
   }
 }
-nav button:hover {
+nav .tab-btn:hover {
   background: #45a049;
 }
 
@@ -105,7 +107,7 @@ main {
     float: left;
   }
   
-  nav button {
+  nav .tab-btn {
     padding: 3% 6%;
     margin: 1.5%;
     border: none;
@@ -114,6 +116,8 @@ main {
     background: none;
     color: white;
     font-size: 5%;
+    text-decoration: none;
+    display: inline-block;
   }
   nav button.active {
     background: #4caf50;
