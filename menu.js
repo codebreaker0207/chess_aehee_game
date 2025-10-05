@@ -2,7 +2,7 @@
 const tabBtns = document.querySelectorAll(".tab-btn");
 const contents = document.querySelectorAll(".tab-content");
 
-const activateTab = (tabId, { scroll = true } = {}) => {
+const activateTab = (tabId) => {
   if (!tabId) return;
 
   contents.forEach((section) => {
@@ -12,13 +12,6 @@ const activateTab = (tabId, { scroll = true } = {}) => {
   tabBtns.forEach((button) => {
     button.classList.toggle("active", button.dataset.tab === tabId);
   });
-
-  if (scroll) {
-    const targetSection = document.getElementById(tabId);
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }
 };
 
 const updateHash = (tabId) => {
@@ -48,17 +41,17 @@ tabBtns.forEach((btn) => {
   });
 });
 
-const applyHashTab = ({ scroll = false } = {}) => {
+const applyHashTab = () => {
   const hashTab = window.location.hash.replace("#", "");
   if (hashTab && document.getElementById(hashTab)) {
-    activateTab(hashTab, { scroll });
+    activateTab(hashTab);
   } else if (contents.length) {
     const defaultTab = contents[0].id;
-    activateTab(defaultTab, { scroll });
+    activateTab(defaultTab);
     updateHash(defaultTab);
   }
 };
 
-window.addEventListener("hashchange", () => applyHashTab({ scroll: true }));
+window.addEventListener("hashchange", () => applyHashTab());
 
-applyHashTab({ scroll: false });
+applyHashTab();
