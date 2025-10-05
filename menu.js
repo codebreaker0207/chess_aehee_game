@@ -2,7 +2,9 @@
 const tabBtns = document.querySelectorAll(".tab-btn");
 const contents = document.querySelectorAll(".tab-content");
 
-  const activateTab = (tabId) => {
+const activateTab = (tabId, { scroll = true } = {}) => {
+  if (!tabId) return;
+
   contents.forEach((section) => {
     section.classList.toggle("active", section.id === tabId);
   });
@@ -11,20 +13,52 @@ const contents = document.querySelectorAll(".tab-content");
     button.classList.toggle("active", button.dataset.tab === tabId);
   });
 
-  const targetSection = document.getElementById(tabId);
-  if (targetSection) {
-    targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (scroll) {
+    const targetSection = document.getElementById(tabId);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+};
+
+const updateHash = (tabId) => {
+  if (!tabId) return;
+  const newHash = `#${tabId}`;
+  if (window.location.hash !== newHash) {
+    if (typeof history.replaceState === "function") {
+      history.replaceState(null, "", newHash);
+    } else {
+      window.location.hash = tabId;
+    }
+  }
+};
+
+const handleTabChange = (tabId, { updateLocation = true } = {}) => {
+  if (!tabId || !document.getElementById(tabId)) return;
+  activateTab(tabId);
+  if (updateLocation) {
+    updateHash(tabId);
   }
 };
 
 tabBtns.forEach((btn) => {
-  btn.setAttribute("type", "button");
-  btn.addEventListener("click", () => {
-   activateTab(btn.dataset.tab);
+  btn.addEventListener("click", (event) => {
+    event.preventDefault();
+    handleTabChange(btn.dataset.tab);
   });
 });
 
-const initiallyActive = document.querySelector(".tab-content.active");
-if (initiallyActive) {
-  activateTab(initiallyActive.id);
-}
+const applyHashTab = ({ scroll = false } = {}) => {
+  const hashTab = window.location.hash.replace("#", "");
+  if (hashTab && document.getElementById(hashTab)) {
+    activateTab(hashTab, { scroll });
+  } else if (contents.length) {
+    const defaultTab = contents[0].id;
+    activateTab(defaultTab, { scroll });
+    updateHash(defaultTab);
+  }
+};
+
+window.addEventListener("hashchange", () => applyHashTab({ scroll: true }));
+
+applyHashTab({ scroll: false });
