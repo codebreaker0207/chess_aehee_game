@@ -2,11 +2,29 @@
 const tabBtns = document.querySelectorAll(".tab-btn");
 const contents = document.querySelectorAll(".tab-content");
 
-tabBtns.forEach(btn => {
+  const activateTab = (tabId) => {
+  contents.forEach((section) => {
+    section.classList.toggle("active", section.id === tabId);
+  });
+
+  tabBtns.forEach((button) => {
+    button.classList.toggle("active", button.dataset.tab === tabId);
+  });
+
+  const targetSection = document.getElementById(tabId);
+  if (targetSection) {
+    targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
+
+tabBtns.forEach((btn) => {
+  btn.setAttribute("type", "button");
   btn.addEventListener("click", () => {
-    // 모든 콘텐츠 숨기기
-    contents.forEach(c => c.classList.remove("active"));
-    // 해당 콘텐츠 보이기
-    document.getElementById(btn.dataset.tab).classList.add("active");
+   activateTab(btn.dataset.tab);
   });
 });
+
+const initiallyActive = document.querySelector(".tab-content.active");
+if (initiallyActive) {
+  activateTab(initiallyActive.id);
+}
