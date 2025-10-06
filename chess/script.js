@@ -168,10 +168,9 @@ class Board {
         return legal;
     }
 
-    // 🌟🌟🌟 PUSHED: 폰이 킹을 잡는 행위를 명시적으로 배제 🌟🌟🌟
     _pawn_moves(r,c,moves){
         let p = this.grid[r][c];
-        let white = /[A-Z]/.test(p);
+        let white = /[A-Z]/.test(p)
         let dir = white ? -1 : 1;
         let start_row = white ? 6 : 1;
         let prom_row = white ? 0 : 7;
@@ -189,14 +188,10 @@ class Board {
             }
         }
         // captures
-        const enemyKing = white ? 'k' : 'K'; // 상대방 킹 지정
         for(let dc of [-1,1]){
             let to = [r+dir, c+dc];
             if(this.in_bounds(to[0],to[1])){
                 let tgt = this.grid[to[0]][to[1]];
-                
-                // 폰이 킹을 잡는 수는 생성하지 않습니다.
-                if(tgt === enemyKing) continue; 
 
                 if(tgt !== '.' && (this.is_white(p) !== this.is_white(tgt))){
                     if(to[0] === prom_row){
@@ -307,19 +302,19 @@ class Board {
         this.set_piece(m.src, '.');
         this.set_piece(m.dst, m.piece);
         // castling: move rook
-        if(m.is_castle){
-            if(dst_c === 6){
-                let rook_from = [src_r,7], rook_to = [src_r,5];
+        if(m.is_castle){␊
+            if(dst_c === 6){␊
+                let rook_from = [src_r,7], rook_to = [src_r,5];␊
+                let rook = this.piece_at(rook_from);␊
+                this.set_piece(rook_from, '.');␊
+                this.set_piece(rook_to, rook);␊
+            } else {␊
+                let rook_from = [src_r,0], rook_to = [src_r,3];␊
                 let rook = this.piece_at(rook_from);
-                this.set_piece(rook_from, '.');
-                this.set_piece(rook_to, rook);
-            } else {
-                let rook_from = [src_r,0], rook_to = [src_r,3];
-                let rook = this.piece_at(rook_to);
-                this.set_piece(rook_from, '.');
-                this.set_piece(rook_to, rook);
-            }
-        }
+                this.set_piece(rook_from, '.');␊
+                this.set_piece(rook_to, rook);␊
+            }␊
+        }␊
         // promotion
         if(m.promotion){
             this.set_piece(m.dst, m.promotion);
@@ -358,19 +353,19 @@ class Board {
             this.set_piece(m.src, pawn);
         }
         // castling restore
-        if(m.is_castle){
-            if(dst_c === 6){
-                let rook_from = [src_r,7], rook_to = [src_r,5];
-                let rook = this.piece_at(rook_to);
-                this.set_piece(rook_to, '.');
-                this.set_piece(rook_from, rook);
-            } else {
-                let rook_from = [src_r,0], rook_to = [src_r,3];
-                let rook = this.piece_at(rook_to);
-                this.set_piece(rook_to, '.');
-                this.set_piece(rook_from, rook);
-            }
-        }
+        if(m.is_castle){␊
+            if(dst_c === 6){␊
+                let rook_from = [src_r,7], rook_to = [src_r,5];␊
+                let rook = this.piece_at(rook_to);␊
+                this.set_piece(rook_to, '.');␊
+                this.set_piece(rook_from, rook);␊
+            } else {␊
+                let rook_from = [src_r,0], rook_to = [src_r,3];␊
+                let rook = this.piece_at(rook_to);␊
+                this.set_piece(rook_to, '.');␊
+                this.set_piece(rook_from, rook);␊
+            }␊
+        }␊
         // en passant restore
         if(m.is_en_passant){
             this.set_piece(m.dst, '.');
@@ -631,4 +626,5 @@ class Game {
 // ------------------------------
 window.addEventListener('load', ()=> {
     const g = new Game();
+
 });
