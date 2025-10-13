@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>지금까지 뽑힌 이름 목록</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      padding: 40px;
+      margin: 0;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .name-list {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .grade-section { margin-bottom: 40px; }
+    .grade-section h2 {
+      color: #007bff;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+    .class-block { margin-bottom: 20px; }
+    .class-block h3 { margin-bottom: 10px; color: #444; }
+    ul { list-style: none; padding-left: 0; }
+    li { padding: 6px 0; border-bottom: 1px solid #eee; font-size: 1.1em; }
+    .link-button {
+      display: block;
+      width: max-content;
+      margin: 0 auto 30px;
+      padding: 12px 24px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .link-button:hover { background-color: #0056b3; }
+  </style>
+  <script>
+    sessionStorage.setItem('fromPicked', 'true');
+  </script>
+</head>
+<body>
+  <h1>지금까지 뽑힌 이름 목록</h1>
+
+  <a class="link-button" href="random_choose.html">이름 뽑기 페이지로 돌아가기</a>
+
+  <div class="name-list" id="pickedListContainer"></div>
+
+  <script>
+    const pickedNames = JSON.parse(localStorage.getItem('pickedNames')) || {};
+    const container = document.getElementById('pickedListContainer');
+
+    Object.keys(pickedNames).forEach(grade => {
+      const gradeDiv = document.createElement('div');
+      gradeDiv.className = 'grade-section';
+
+      const gradeTitle = document.createElement('h2');
+      gradeTitle.textContent = `${grade}학년`;
+      gradeDiv.appendChild(gradeTitle);
+
+      Object.keys(pickedNames[grade]).forEach(cls => {
+        const classBlock = document.createElement('div');
+        classBlock.className = 'class-block';
+
+        const classTitle = document.createElement('h3');
+        classTitle.textContent = `${cls}반`;
+        classBlock.appendChild(classTitle);
+
+        const ul = document.createElement('ul');
+        const nameList = pickedNames[grade][cls];
+        if (Array.isArray(nameList)) {
+          nameList.forEach(name => {
+            const li = document.createElement('li');
+            li.textContent = name;
+            ul.appendChild(li);
+          });
+        }
+
+        classBlock.appendChild(ul);
+        gradeDiv.appendChild(classBlock);
+      });
+
+      container.appendChild(gradeDiv);
+    });
+  </script>
+</body>
+</html>
