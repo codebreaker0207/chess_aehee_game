@@ -27,6 +27,8 @@
 
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
+    const signupBtn = document.getElementById("signupBtn");
+    const signupBtnDefaultLabel = signupBtn.textContent;
 
     const redirectToHome = () => {
       window.location.href = "index.html";
@@ -55,20 +57,33 @@
       }
     };
     // 회원가입
-    document.getElementById("signupBtn").addEventListener("click", async () => {
+    signupBtn.addEventListener("click", async () => {
       const email = emailInput.value.trim();
       const password = passwordInput.value;
+
+      if (!email) {
+        alert("이메일을 입력해주세요.");
+        return;
+      }
+      
       try {
+        signupBtn.disabled = true;
+        signupBtn.textContent = "검증 중...";
+
         const isRealEmail = await verifyEmailExistence(email);
         if (!isRealEmail) {
           alert("존재하는 이메일 주소로만 회원가입이 가능합니다.");
           return;
         }
+  
         await createUserWithEmailAndPassword(auth, email, password);
         alert("회원가입 성공!");
         redirectToHome();
       } catch (e) {
         alert("회원가입 실패: " + e.message);
+      } finally {
+        signupBtn.disabled = false;
+        signupBtn.textContent = signupBtnDefaultLabel;
       }
     });
 
