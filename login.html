@@ -5,30 +5,26 @@
   <title>로그인</title>
 </head>
 <body>
-  <h2>로그인 / 회원가입</h2>
-  <input type="email" id="email" placeholder="이메일"><br>
-  <input type="password" id="password" placeholder="비밀번호"><br>
-  <button id="signupBtn">회원가입</button>
-  <button id="loginBtn">로그인</button>
-  <hr>
+  <h2>구글 계정으로 로그인</h2>
+  <p>이메일과 비밀번호 입력 없이 구글 계정으로만 로그인할 수 있습니다.</p>
   <button id="googleLoginBtn">구글로 로그인</button>
 
   <script type="module">
     import {
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
       signInWithPopup,
+      signInWithRedirect,
+      getRedirectResult,
       GoogleAuthProvider,
       onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { auth } from "./firebase-config.js";
 
     const provider = new GoogleAuthProvider();
-
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const signupBtn = document.getElementById("signupBtn");
-    const signupBtnDefaultLabel = signupBtn.textContent;
+    provider.setCustomParameters({
+      prompt: "select_account"
+    });
+    const googleLoginBtn = document.getElementById("googleLoginBtn");
+    const googleLoginBtnDefaultLabel = googleLoginBtn.textContent;
 
     const redirectToHome = () => {
       window.location.href = "index.html";
@@ -41,75 +37,43 @@
       }
     });
 
-    const verifyEmailExistence = async (email) => {
-      const endpoint = `https://api.eva.pingutil.com/email?email=${encodeURIComponent(email)}`;
+    googleLoginBtn.addEventListener("click", async () => {
       try {
-        const response = await fetch(endpoint);
-        if (!response.ok) {
-          throw new Error("이메일 검증 서비스 연결에 실패했습니다.");
-        }
+        googleLoginBtn.disabled = true;
+        googleLoginBtn.textContent = "구글 로그인 중...";
 
-        const result = await response.json();
-        return result?.status === "success" && result?.data?.deliverable === true;
-      } catch (error) {
-        console.error("이메일 검증 중 오류", error);
-        throw new Error("이메일 검증에 실패했습니다. 잠시 후 다시 시도해주세요.");
-      }
-    };
-    // 회원가입
-    signupBtn.addEventListener("click", async () => {
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-
-      if (!email) {
-        alert("이메일을 입력해주세요.");
-        return;
-      }
-      
-      try {
-        signupBtn.disabled = true;
-        signupBtn.textContent = "검증 중...";
-
-        const isRealEmail = await verifyEmailExistence(email);
-        if (!isRealEmail) {
-          alert("존재하는 이메일 주소로만 회원가입이 가능합니다.");
-          return;
-        }
-  
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert("회원가입 성공!");
-        redirectToHome();
-      } catch (e) {
-        alert("회원가입 실패: " + e.message);
-      } finally {
-        signupBtn.disabled = false;
-        signupBtn.textContent = signupBtnDefaultLabel;
-      }
-    });
-
-    // 로그인
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert("로그인 성공!");
-        redirectToHome();
-      } catch (e) {
-        alert("로그인 실패: " + e.message);
-      }
-    });
-
-    // 구글 로그인
-    document.getElementById("googleLoginBtn").addEventListener("click", async () => {
-      try {
         await signInWithPopup(auth, provider);
         alert("구글 로그인 성공!");
         redirectToHome();
       } catch (e) {
-        alert("구글 로그인 실패: " + e.message);
+        if (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment") {
+          try {
+            await signInWithRedirect(auth, provider);
+            return;
+          } catch (redirectError) {
+            alert("구글 로그인 실패: " + redirectError.message);
+          }
+        } else {
+          alert("구글 로그인 실패: " + e.message);
+        }
+      } finally {
+        googleLoginBtn.disabled = false;
+        googleLoginBtn.textContent = googleLoginBtnDefaultLabel;
       }
     });
+
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) {
+          alert("구글 로그인 성공!");
+          redirectToHome();
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          alert("구글 로그인 실패: " + error.message);
+        }
+      });
   </script>
 </body>
 </html>
