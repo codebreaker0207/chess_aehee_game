@@ -64,3 +64,29 @@ loginOverlay.addEventListener('click', e => {
 closeLoginBtn.addEventListener('click', () => {
   loginOverlay.style.display = 'none';
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const loginLink = document.getElementById('loginLink');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const userInfo = document.getElementById('userInfo');
+
+  // 이미 로그인된 사용자인지 확인
+  const user = getUser(); // 로그인 상태 확인 함수 (firebase 등 사용)
+  if (user) {
+    loginLink.style.display = 'none';
+    logoutBtn.style.display = 'inline-block';
+    userInfo.textContent = `안녕하세요, ${user.email}`;
+  } else {
+    loginLink.style.display = 'inline-block';
+    logoutBtn.style.display = 'none';
+    userInfo.textContent = '';
+  }
+
+  // 로그아웃 버튼 클릭
+  logoutBtn.addEventListener('click', () => {
+    logoutUser(); // 로그아웃 처리 함수
+    loginLink.style.display = 'inline-block';
+    logoutBtn.style.display = 'none';
+    userInfo.textContent = '';
+  });
+});
