@@ -70,7 +70,7 @@
 
         await signInWithPopup(auth, provider);
         alert("구글 로그인 성공!");
-        redirectToHome();
+        //redirectToHome();
       } catch (e) {
         if (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment") {
           try {
