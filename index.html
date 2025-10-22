@@ -6,7 +6,7 @@
   <title>aehee 웹사이트</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8997409885408315"
      crossorigin="anonymous"></script>
-   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
   <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
@@ -27,6 +27,7 @@
 </head>
 
 <body>
+<!-- 로그인 모달 -->
 <div class="login-overlay" id="loginOverlay" style="display:none;">
   <div class="login-modal">
     <button id="closeLoginBtn" class="close-btn">✖</button>
@@ -35,75 +36,7 @@
     <button id="googleLoginBtn">구글로 가입</button>
   </div>
 </div>
-<script type="module">
-    import {
-      signInWithPopup,
-      signInWithRedirect,
-      getRedirectResult,
-      GoogleAuthProvider,
-      onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { auth } from "./firebase-config.js";
 
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: "select_account"
-    });
-    const googleLoginBtn = document.getElementById("googleLoginBtn");
-    const googleLoginBtnDefaultLabel = googleLoginBtn.textContent;
-
-    const redirectToHome = () => {
-      window.location.href = "index.html";
-    };
-
-    // 이미 로그인된 사용자는 홈으로 이동
-    const isLoginPage = window.location.pathname.includes("login.html");
-  
-    onAuthStateChanged(auth, (user) => {
-      if (user && !isLoginPage) {
-        redirectToHome();
-      }
-    });
-
-    googleLoginBtn.addEventListener("click", async () => {
-      try {
-        googleLoginBtn.disabled = true;
-        googleLoginBtn.textContent = "구글 로그인 중...";
-
-        await signInWithPopup(auth, provider);
-        alert("구글 로그인 성공!");
-        //redirectToHome();
-      } catch (e) {
-        if (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment") {
-          try {
-            await signInWithRedirect(auth, provider);
-            return;
-          } catch (redirectError) {
-            alert("구글 로그인 실패: " + redirectError.message);
-          }
-        } else {
-          alert("구글 로그인 실패: " + e.message);
-        }
-      } finally {
-        googleLoginBtn.disabled = false;
-        googleLoginBtn.textContent = googleLoginBtnDefaultLabel;
-      }
-    });
-
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result) {
-          alert("구글 로그인 성공!");
-          //redirectToHome();
-        }
-      })
-      .catch((error) => {
-        if (error) {
-          alert("구글 로그인 실패: " + error.message);
-        }
-      });
-  </script>
-  
 <header>
   <img src="0&1.png" alt="0과1의반란 로고" width="120px"/>
   <h1>aehee 웹사이트</h1>
@@ -117,98 +50,52 @@
     <a href="#" id="loginLink">로그인</a>
     <button id="logoutBtn" style="display:none;">로그아웃</button>
     <span id="userInfo"></span>
-    <!-- 로그인 버튼 추가 -->
-
   </nav>
 </header>
 
 <main>
-  <!-- 기존 섹션: intro, play, school, contact -->
   <section id="intro" class="tab-content active">
-  <p class="web"><a href="privacy.html">개인정보 처리방침</a></p>
-  <p class="web"><a href="terms.html">이용약관</a></p>
-  <h2>aehee 소개</h2>
+    <p class="web"><a href="privacy.html">개인정보 처리방침</a></p>
+    <p class="web"><a href="terms.html">이용약관</a></p>
+    <h2>aehee 소개</h2>
+    <p>aehee 웹사이트는 저희 동아리 '0과 1의 반란'이 직접 개발한 게임과 학습 자료를 공유하기 위해 만들어졌습니다...</p>
+  </section>
 
-  <p>
-    aehee 웹사이트는 저희 동아리 '0과 1의 반란'이 직접 개발한 게임과 학습 자료를 공유하기 위해 만들어졌습니다.
-    2024년부터 시작된 정보동아리 활동은 파이썬과 Pygame 학습으로 이어졌으며, 학생들은 직접 게임을 제작하고
-    코딩을 익히는 경험을 쌓아왔습니다. 그래서 이 게임들을 올리기우해 aehee.com이 만들어졌습니다.
-    본 사이트에서는 체스, 테트리스, 강화 서바이벌, 지렁이 게임 등 다양한
-    창작 게임을 플레이할 수 있으며, 단순한 게임이 아닌  각 게임의 제작 과정과 활용 방법을 상세히 안내합니다.
-  </p>
-
-  <p>
-    또한 '교과도우미' 섹션에서는 학교 과목과 관련된 학습 자료와 모둠 배정 프로그램을 제공하여,
-    학생들이 실습과 학습을 동시에 경험할 수 있도록 설계되었습니다. 웹사이트 전반에 걸쳐
-    각 게임과 학습 자료의 개발 과정, 문제 해결 방법, 실습 팁 등 풍부한 텍스트 자료가 포함되어
-    방문자가 충분히 읽고 이해할 수 있도록 구성되어 있습니다.
-  </p>
-  <p>
-    aehee 게임 웹사이트는 단순히 게임을 제고하는 사이트가 아니라, 저희들의 제작물을
-    업로드 하고, 교과도우미등 여러가지 제작물들이 함께 우러진 필요한 프로그램을
-    사이트에 들어가서 경험하고 이러한 프로젝트 또한 참고할 수 있게 하는 사이트입니다.
-    앞으로도 저희의 제작물들은 꾸준히 올라올 예정이고, 지금도 개발중입니다.
-  </p>
-    <ins class="kakao_ad_area" style="display:none;"
-    data-ad-unit = "DAN-lRIDZxfDln0VCLA6"
-    data-ad-width = "300"
-    data-ad-height = "250"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-</section>
   <section id="play" class="tab-content">
     <h2>aehee game</h2>
     <div id="controls">
-      <a href="chess/index.html" class="btn">
-        <img src="game_L/chess_L.png" alt="체스 게임 플레이" width="200">
-      </a>
-    <canvas id="board-canvas" width="10" height="10"></canvas>
-       <a href="go.html" class="btn">
-        <img src="game_L/zombie_L.png" alt="서바이벌_강화 게임 플레이" width="200">
-      </a>
-    <canvas id="board-canvas" width="10" height="10"></canvas>
-      <a href="snake/index.html" class="btn">
-        <img src="game_L/snake_L.png" alt="지렁이 게임 플레이" width="200">
-      </a>
+      <a href="chess/index.html" class="btn"><img src="game_L/chess_L.png" alt="체스 게임 플레이" width="200"></a>
+      <a href="go.html" class="btn"><img src="game_L/zombie_L.png" alt="서바이벌_강화 게임 플레이" width="200"></a>
+      <a href="snake/index.html" class="btn"><img src="game_L/snake_L.png" alt="지렁이 게임 플레이" width="200"></a>
     </div>
     <h6>aehee에 의한 창작물</h6>
   </section>
+
   <section id="aehee" class="tab-content">
     <h2>aehee 프로그램</h2>
     <div id="controls">
-     <p>아래 버튼을 눌러 다운로드하세요:</p>
-     <a href="tetris.exe" download>
-      <button>테트리스 다운로드</button>
-     </a>
+      <p>아래 버튼을 눌러 다운로드하세요:</p>
+      <a href="tetris.exe" download><button>테트리스 다운로드</button></a>
+      <a href="https://github.com/codebreaker0207/chess_aehee_game/releases/download/1.0/start.exe" download><button class="towdo">타워 디펜스 다운로드</button></a>
     </div>
-    <canvas id="board-canvas" width="10" height="10"></canvas>
-    <p><br><img src="game_L/4k.png" alt="게임그림" class="gamedownimg" width="16%"></p>
-      <a href="https://github.com/codebreaker0207/chess_aehee_game/releases/download/1.0/start.exe" download>
-       <button class="towdo">타워 디펜스 다운로드</button>
-      </a>
   </section>
 
   <section id="school" class="tab-content">
     <h2>교과도우미</h2>
     <div id="controls">
       <a href="location/index.html" class="btn">모둠 배정</a>
-    </div>
-    <canvas id="board-canvas" width="100" height="100"></canvas>
-    <div id="controls">
       <a href="cps/index.html" class="btn">cps측정기</a>
-    </div>
-    <canvas id="board-canvas" width="100" height="100"></canvas>
-    <div id="controls">
       <a href="class/random_choose.html" class="btn">학생 뽑기</a>
     </div>
   </section>
+
   <section id="profill" class="tab-content">
-   <h2>프로필</h2>
-   <p>나의 이메일</p>
-   <p id="profileEmail">로그인되어 있지 않습니다.</p>
+    <h2>프로필</h2>
+    <p>나의 이메일</p>
+    <p id="profileEmail">로그인되어 있지 않습니다.</p>
   </section>
 </main>
 
 <script src="menu.js"></script>
-<script type="module" src="home-auth.js"></script>
 </body>
 </html>
