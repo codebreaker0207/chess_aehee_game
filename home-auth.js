@@ -35,3 +35,5 @@ if (logoutBtn) {
     }
   });
 }
+
+console.log("Auth 상태 감지 스크립트 로드됨");
