@@ -2,91 +2,63 @@
 const tabBtns = document.querySelectorAll(".tab-btn");
 const contents = document.querySelectorAll(".tab-content");
 
-const activateTab = (tabId) => {
+const activateTab = (tabId, { scroll = true } = {}) => {
   if (!tabId) return;
-  contents.forEach(section => {
+
+  contents.forEach((section) => {
     section.classList.toggle("active", section.id === tabId);
   });
-  tabBtns.forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.tab === tabId);
+
+  tabBtns.forEach((button) => {
+    button.classList.toggle("active", button.dataset.tab === tabId);
   });
+
+  if (scroll) {
+    const targetSection = document.getElementById(tabId);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
 };
 
 const updateHash = (tabId) => {
   if (!tabId) return;
   const newHash = `#${tabId}`;
   if (window.location.hash !== newHash) {
-    history.replaceState(null, "", newHash);
+    if (typeof history.replaceState === "function") {
+      history.replaceState(null, "", newHash);
+    } else {
+      window.location.hash = tabId;
+    }
   }
 };
 
-const handleTabChange = (tabId) => {
+const handleTabChange = (tabId, { updateLocation = true } = {}) => {
   if (!tabId || !document.getElementById(tabId)) return;
   activateTab(tabId);
-  updateHash(tabId);
+  if (updateLocation) {
+    updateHash(tabId);
+  }
 };
 
-tabBtns.forEach(btn => {
-  btn.addEventListener("click", e => {
-    e.preventDefault();
+tabBtns.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    event.preventDefault();
     handleTabChange(btn.dataset.tab);
   });
 });
 
-const applyHashTab = () => {
+const applyHashTab = ({ scroll = false } = {}) => {
   const hashTab = window.location.hash.replace("#", "");
   if (hashTab && document.getElementById(hashTab)) {
-    activateTab(hashTab);
+    activateTab(hashTab, { scroll });
   } else if (contents.length) {
     const defaultTab = contents[0].id;
-    activateTab(defaultTab);
+    activateTab(defaultTab, { scroll });
     updateHash(defaultTab);
   }
 };
 
-window.addEventListener("hashchange", applyHashTab);
-applyHashTab();
+window.addEventListener("hashchange", () => applyHashTab({ scroll: true }));
 
-// 로그인 모달
-const loginLink = document.getElementById('loginLink');
-const loginOverlay = document.getElementById('loginOverlay');
-const closeLoginBtn = document.getElementById('closeLoginBtn');
-
-loginLink.addEventListener('click', e => {
-  e.preventDefault();
-  loginOverlay.style.display = 'flex';
-});
-
-loginOverlay.addEventListener('click', e => {
-  if (e.target === loginOverlay) loginOverlay.style.display = 'none';
-});
-
-closeLoginBtn.addEventListener('click', () => {
-  loginOverlay.style.display = 'none';
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const loginLink = document.getElementById('loginLink');
-  const logoutBtn = document.getElementById('logoutBtn');
-  const userInfo = document.getElementById('userInfo');
-
-  // 이미 로그인된 사용자인지 확인
-  const user = getUser(); // 로그인 상태 확인 함수 (firebase 등 사용)
-  if (user) {
-    loginLink.style.display = 'none';
-    logoutBtn.style.display = 'inline-block';
-    userInfo.textContent = `안녕하세요, ${user.email}`;
-  } else {
-    loginLink.style.display = 'inline-block';
-    logoutBtn.style.display = 'none';
-    userInfo.textContent = '';
-  }
-
-  // 로그아웃 버튼 클릭
-  logoutBtn.addEventListener('click', () => {
-    logoutUser(); // 로그아웃 처리 함수
-    loginLink.style.display = 'inline-block';
-    logoutBtn.style.display = 'none';
-    userInfo.textContent = '';
-  });
-});
+applyHashTab({ scroll: false });
