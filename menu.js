@@ -57,6 +57,9 @@ const loginOverlay = document.getElementById('loginOverlay');
 
 loginLink.addEventListener('click', (e) => {
   e.preventDefault(); // 링크 이동 막기
+  if (!auth.currentUser) {
+    loginOverlay.style.display = 'flex';
+  }
   loginOverlay.style.display = 'flex';
 });
 
