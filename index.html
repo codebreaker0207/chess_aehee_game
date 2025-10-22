@@ -57,8 +57,10 @@
     };
 
     // 이미 로그인된 사용자는 홈으로 이동
+    const isLoginPage = window.location.pathname.includes("login.html");
+  
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user && !isLoginPage) {
         redirectToHome();
       }
     });
