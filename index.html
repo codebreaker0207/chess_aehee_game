@@ -25,8 +25,83 @@
   <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 </head>
-<body>
 
+<body>
+<div class="login-overlay" id="loginOverlay" style="display:none;">
+  <div class="login-modal">
+    <button id="closeLoginBtn" class="close-btn">✖</button>
+    <h2>구글 계정으로 가입</h2>
+    <p>이메일과 비밀번호 입력 없이 구글 계정으로만 가입할 수 있습니다.</p>
+    <button id="googleLoginBtn">구글로 가입</button>
+  </div>
+</div>
+<script type="module">
+    import {
+      signInWithPopup,
+      signInWithRedirect,
+      getRedirectResult,
+      GoogleAuthProvider,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { auth } from "./firebase-config.js";
+
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: "select_account"
+    });
+    const googleLoginBtn = document.getElementById("googleLoginBtn");
+    const googleLoginBtnDefaultLabel = googleLoginBtn.textContent;
+
+    const redirectToHome = () => {
+      window.location.href = "index.html";
+    };
+
+    // 이미 로그인된 사용자는 홈으로 이동
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        redirectToHome();
+      }
+    });
+
+    googleLoginBtn.addEventListener("click", async () => {
+      try {
+        googleLoginBtn.disabled = true;
+        googleLoginBtn.textContent = "구글 로그인 중...";
+
+        await signInWithPopup(auth, provider);
+        alert("구글 로그인 성공!");
+        redirectToHome();
+      } catch (e) {
+        if (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment") {
+          try {
+            await signInWithRedirect(auth, provider);
+            return;
+          } catch (redirectError) {
+            alert("구글 로그인 실패: " + redirectError.message);
+          }
+        } else {
+          alert("구글 로그인 실패: " + e.message);
+        }
+      } finally {
+        googleLoginBtn.disabled = false;
+        googleLoginBtn.textContent = googleLoginBtnDefaultLabel;
+      }
+    });
+
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) {
+          alert("구글 로그인 성공!");
+          redirectToHome();
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          alert("구글 로그인 실패: " + error.message);
+        }
+      });
+  </script>
+  
 <header>
   <img src="0&1.png" alt="0과1의반란 로고" width="120px"/>
   <h1>aehee 웹사이트</h1>
