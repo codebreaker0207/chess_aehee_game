@@ -71,24 +71,7 @@ closeLoginBtn.addEventListener('click', () => {
   loginOverlay.style.display = 'none';
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const loginLink = document.getElementById('loginLink');
-  const loginOverlay = document.getElementById('loginOverlay');
-  const closeLoginBtn = document.getElementById('closeLoginBtn');
 
-  loginLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    loginOverlay.style.display = 'flex';
-  });
-
-  loginOverlay.addEventListener('click', (e) => {
-    if (e.target === loginOverlay) loginOverlay.style.display = 'none';
-  });
-
-  closeLoginBtn.addEventListener('click', () => {
-    loginOverlay.style.display = 'none';
-  });
-});
 
 window.addEventListener("hashchange", () => applyHashTab());
 
