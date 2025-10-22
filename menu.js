@@ -72,6 +72,38 @@ const closeLoginBtn = document.getElementById('closeLoginBtn');
 
 closeLoginBtn.addEventListener('click', () => {
   loginOverlay.style.display = 'none';
+
+onAuthStateChanged(auth, (user) => {
+  const logoutBtn = document.getElementById("logoutBtn");
+  const loginLink = document.getElementById("loginLink");
+  const userInfo = document.getElementById("userInfo");
+  const profileEmail = document.getElementById("profileEmail");
+
+  if (user) {
+    // 로그인된 상태
+    loginLink.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+    userInfo.textContent = user.email;
+    if (profileEmail) profileEmail.textContent = user.email;
+  } else {
+    // 로그아웃 상태
+    loginLink.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+    userInfo.textContent = "";
+    if (profileEmail) profileEmail.textContent = "로그인되어 있지 않습니다.";
+  }
+});
+
+// 로그아웃 버튼 클릭 시
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  try {
+    await auth.signOut();
+    alert("로그아웃 완료");
+    window.location.reload();
+  } catch (e) {
+    alert("로그아웃 실패: " + e.message);
+  }
+});
 });
 
 
