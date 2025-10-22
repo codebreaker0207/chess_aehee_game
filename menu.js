@@ -4,13 +4,11 @@ const contents = document.querySelectorAll(".tab-content");
 
 const activateTab = (tabId) => {
   if (!tabId) return;
-
-  contents.forEach((section) => {
+  contents.forEach(section => {
     section.classList.toggle("active", section.id === tabId);
   });
-
-  tabBtns.forEach((button) => {
-    button.classList.toggle("active", button.dataset.tab === tabId);
+  tabBtns.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.tab === tabId);
   });
 };
 
@@ -18,25 +16,19 @@ const updateHash = (tabId) => {
   if (!tabId) return;
   const newHash = `#${tabId}`;
   if (window.location.hash !== newHash) {
-    if (typeof history.replaceState === "function") {
-      history.replaceState(null, "", newHash);
-    } else {
-      window.location.hash = tabId;
-    }
+    history.replaceState(null, "", newHash);
   }
 };
 
-const handleTabChange = (tabId, { updateLocation = true } = {}) => {
+const handleTabChange = (tabId) => {
   if (!tabId || !document.getElementById(tabId)) return;
   activateTab(tabId);
-  if (updateLocation) {
-    updateHash(tabId);
-  }
+  updateHash(tabId);
 };
 
-tabBtns.forEach((btn) => {
-  btn.addEventListener("click", (event) => {
-    event.preventDefault();
+tabBtns.forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
     handleTabChange(btn.dataset.tab);
   });
 });
@@ -52,62 +44,23 @@ const applyHashTab = () => {
   }
 };
 
+window.addEventListener("hashchange", applyHashTab);
+applyHashTab();
+
+// 로그인 모달
 const loginLink = document.getElementById('loginLink');
 const loginOverlay = document.getElementById('loginOverlay');
+const closeLoginBtn = document.getElementById('closeLoginBtn');
 
-loginLink.addEventListener('click', (e) => {
-  e.preventDefault(); // 링크 이동 막기
-  if (!auth.currentUser) {
-    loginOverlay.style.display = 'flex';
-  }
+loginLink.addEventListener('click', e => {
+  e.preventDefault();
   loginOverlay.style.display = 'flex';
 });
 
-// 모달 바깥 클릭하면 닫기
-loginOverlay.addEventListener('click', (e) => {
+loginOverlay.addEventListener('click', e => {
   if (e.target === loginOverlay) loginOverlay.style.display = 'none';
 });
 
-const closeLoginBtn = document.getElementById('closeLoginBtn');
-
 closeLoginBtn.addEventListener('click', () => {
   loginOverlay.style.display = 'none';
-
-onAuthStateChanged(auth, (user) => {
-  const logoutBtn = document.getElementById("logoutBtn");
-  const loginLink = document.getElementById("loginLink");
-  const userInfo = document.getElementById("userInfo");
-  const profileEmail = document.getElementById("profileEmail");
-
-  if (user) {
-    // 로그인된 상태
-    loginLink.style.display = "none";
-    logoutBtn.style.display = "inline-block";
-    userInfo.textContent = user.email;
-    if (profileEmail) profileEmail.textContent = user.email;
-  } else {
-    // 로그아웃 상태
-    loginLink.style.display = "inline-block";
-    logoutBtn.style.display = "none";
-    userInfo.textContent = "";
-    if (profileEmail) profileEmail.textContent = "로그인되어 있지 않습니다.";
-  }
 });
-
-// 로그아웃 버튼 클릭 시
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-  try {
-    await auth.signOut();
-    alert("로그아웃 완료");
-    window.location.reload();
-  } catch (e) {
-    alert("로그아웃 실패: " + e.message);
-  }
-});
-});
-
-
-
-window.addEventListener("hashchange", () => applyHashTab());
-
-applyHashTab();
