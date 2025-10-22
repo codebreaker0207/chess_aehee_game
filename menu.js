@@ -52,6 +52,44 @@ const applyHashTab = () => {
   }
 };
 
+const loginLink = document.getElementById('loginLink');
+const loginOverlay = document.getElementById('loginOverlay');
+
+loginLink.addEventListener('click', (e) => {
+  e.preventDefault(); // 링크 이동 막기
+  loginOverlay.style.display = 'flex';
+});
+
+// 모달 바깥 클릭하면 닫기
+loginOverlay.addEventListener('click', (e) => {
+  if (e.target === loginOverlay) loginOverlay.style.display = 'none';
+});
+
+const closeLoginBtn = document.getElementById('closeLoginBtn');
+
+closeLoginBtn.addEventListener('click', () => {
+  loginOverlay.style.display = 'none';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const loginLink = document.getElementById('loginLink');
+  const loginOverlay = document.getElementById('loginOverlay');
+  const closeLoginBtn = document.getElementById('closeLoginBtn');
+
+  loginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginOverlay.style.display = 'flex';
+  });
+
+  loginOverlay.addEventListener('click', (e) => {
+    if (e.target === loginOverlay) loginOverlay.style.display = 'none';
+  });
+
+  closeLoginBtn.addEventListener('click', () => {
+    loginOverlay.style.display = 'none';
+  });
+});
+
 window.addEventListener("hashchange", () => applyHashTab());
 
 applyHashTab();
