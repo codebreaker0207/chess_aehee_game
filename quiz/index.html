@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 아재개그 퀴즈</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #quiz-container { max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        #question { font-size: 1.5em; margin-bottom: 20px; }
+        .option-button { display: block; width: 100%; padding: 10px; margin-bottom: 10px; background-color: #f0f0f0; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        .option-button:hover:not(:disabled) { background-color: #ddd; }
+        #answer-area { margin-top: 20px; font-weight: bold; min-height: 20px; }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>🗓️ 오늘의 아재개그</h1>
+        <div id="date-display"></div>
+        <hr>
+        <div id="quiz-area">
+            <p id="question">로딩 중...</p>
+            <div id="options">
+                </div>
+        </div>
+        <button id="submit-quiz" class="option-button">정답 확인</button>
+        <div id="answer-area"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
