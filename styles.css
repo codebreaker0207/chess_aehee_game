@@ -65,6 +65,11 @@ nav .tab-btn:hover {
   background: #45a049;
 }
 
+.prlf {
+  background: lightcoral;
+  width: 30%;
+}
+
 main {
   padding: 20px;
 }
