@@ -1,12 +1,14 @@
 // 아재개그 퀴즈 데이터
 const allQuizzes = [
-    { question: "세상에서 가장 쉬운 숫자는?", options: ["0", "1", "18", "7"], answer: "18" }, // 십팔(쉽팔)
+    { question: "세상에서 가장 쉬운 숫자는?", options: ["0", "18", "2"], answer: "2" }, // 십팔(쉽팔)
     { question: "소가 번개에 맞아 죽으면?", options: ["우사인볼트", "다이소", "소고기"], answer: "우사인볼트" }, // 우(소)사인 볼트
     { question: "세종대왕이 만든 우유는?", options: ["아야어여오요우유", "한글우유", "왕우유"], answer: "아야어여오요우유" }, // 아야어여오요우유
-    { question: "바나나가 웃으면?", options: ["바나나킥", "바나나스마일", "바나나나"], answer: "바나나나" }, // 바나나나
-    { question: "세상에서 가장 뜨거운 복숭아는?", options: ["천도복숭아", "핫피치", "털복숭아"], answer: "털복숭아" }, // 털복숭아(Hot)
+    { question: "바나나가 웃으면?", options: ["바나나킥", "바나나스마일", "바나나나"], answer: "바나나킥" }, // 바나나나
+    { question: "세상에서 가장 뜨거운 복숭아는?", options: ["천도복숭아", "핫피치", "털복숭아"], answer: "천도복숭아" }, // 털복숭아(Hot)
     { question: "고등학생들이 싫어하는 나무는?", options: ["은행나무", "소나무", "야자나무"], answer: "야자나무" }, // 야간 자율 학습
-    { question: "물고기 중 가장 학력이 좋은 물고기는?", options: ["고래", "참치", "꽁치"], answer: "꽁치" } // 꽁치 (공부를 치열하게)
+    { question: "물고기 중 가장 학력이 좋은 물고기는?", options: ["고래", "참치", "꽁치"], answer: "꽁치" }, // 꽁치 (공부를 치열하게)
+    { question: "직접 총을 만들면?", options: ["손수건", "취권", "직총"], answer: "손수건" },
+    { question: "지구가 가장 고생한 시기는?", options: ["지구온난화", "고생대", "어몽어스(/earth)/"], answer: "고생대" }
 ];
 
 // **********************************************
@@ -106,4 +108,5 @@ function checkAnswer() {
 
 // 초기화 및 이벤트 리스너
 document.addEventListener('DOMContentLoaded', loadDailyQuiz);
+
 document.getElementById('submit-quiz').addEventListener('click', checkAnswer);
