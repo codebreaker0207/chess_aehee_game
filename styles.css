@@ -36,10 +36,7 @@ header {
     transform: translateY(-50%);
   }
 
-  #profill {
-    margin: 0 10%;
-    text-align: left;
-  }
+  
 
 
 
@@ -60,6 +57,12 @@ header {
     text-decoration: none;
     display: inline-block;
   }
+  
+  nav #profill {
+    margin: 0 10%;
+    text-align: left;
+  }
+  
   nav button.active {
     background: #4caf50;
     color: #fff;
