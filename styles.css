@@ -36,6 +36,11 @@ header {
     transform: translateY(-50%);
   }
 
+  #profill {
+    margin: 0 10%;
+    text-align: left;
+  }
+
 
 
 
