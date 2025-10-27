@@ -58,7 +58,7 @@ header {
     display: inline-block;
   }
   
-  nav #profill {
+  #profill {
     margin: 0 10%;
     text-align: left;
   }
