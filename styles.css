@@ -59,8 +59,8 @@ header {
   }
   
   #profill {
-    margin: 0 10%;
-    text-align: left;
+    margin: 0 10% !important;
+    text-align: left !important;
   }
   
   nav button.active {
