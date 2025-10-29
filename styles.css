@@ -36,10 +36,10 @@ header {
     transform: translateY(-50%);
   }
 
-  
-
-
-
+  #intro {
+    margin: 0 15%;
+    text-align: left !important;
+  }
 
   nav {
     margin-top: 10px;
