@@ -64,6 +64,11 @@ header {
     text-align: left !important;
   }
   
+  #under-bar {
+    color: #000;
+  }
+  
+  
   nav button.active {
     background: #4caf50;
     color: #fff;
