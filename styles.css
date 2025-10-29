@@ -75,8 +75,9 @@ header {
 
 #under-bar {
   background-color: #333;
-  margin: 0 0;
-  height: 5%;
+  margin: 10% 20%;
+  height: 10%;
+  width: 100%;
   position: fixed;
 }
 
