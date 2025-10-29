@@ -79,6 +79,7 @@ header {
   height: 10%;
   width: 100%;
   position: fixed;
+  bottom: 0;
 }
 
 nav .tab-btn:hover {
