@@ -64,10 +64,7 @@ header {
     text-align: left !important;
   }
   
-  #under-bar {
-    background-color: #333;
-    margin: 0 0;
-  }
+  
   
   
   nav button.active {
@@ -75,6 +72,11 @@ header {
     color: #fff;
   }
 }
+
+#under-bar {
+    background-color: #333;
+    margin: 0 0;
+  }
 
 nav .tab-btn:hover {
   background: #45a049;
