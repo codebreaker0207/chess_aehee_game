@@ -76,7 +76,8 @@ header {
 #under-bar {
   background-color: #333;
   margin: 0 0;
-  height: 5% 
+  height: 5%;
+  position: fixed;
 }
 
 nav .tab-btn:hover {
