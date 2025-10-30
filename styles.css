@@ -65,6 +65,7 @@ header {
     text-align: left !important;
   }
   
+
   
   
   
@@ -90,6 +91,10 @@ nav .tab-btn:hover {
 
 main {
   padding: 20px;
+}
+
+.tbtn {
+  border: 0 solid #00a;
 }
 
 /* .web {position: absolute;right: 5%;transform: translateY(-50%);} */
