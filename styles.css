@@ -59,6 +59,7 @@ header {
   }
   
   #profill {
+    padding: 5% 0 !important;
     margin: 0 25% !important;
     margin-top: 5% !important;
     text-align: left !important;
@@ -88,7 +89,7 @@ nav .tab-btn:hover {
 }
 
 main {
-  padding: 20px 10%;
+  padding: 20px;
 }
 
 /* .web {position: absolute;right: 5%;transform: translateY(-50%);} */
