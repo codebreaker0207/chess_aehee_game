@@ -38,7 +38,7 @@
     <a class="tab-btn" data-tab="profill" href="#profill" role="button">프로필</a>
 
     <a href="login.html" id="loginLink">로그인</a>
-    <button id="logoutBtn" style="display:none;">로그아웃</button>
+    <button class="tbtn" id="logoutBtn" style="display:none;">로그아웃</button>
     <span id="userInfo"></span>
     <!-- 로그인 버튼 추가 -->
 
@@ -123,13 +123,13 @@
     <div id="controls">
      <p>아래 버튼을 눌러 다운로드하세요:</p>
      <a href="tetris.exe" download>
-      <button>테트리스 다운로드</button>
+      <button class="tbtn">테트리스 다운로드</button>
      </a>
     </div>
     <canvas id="board-canvas" width="10" height="10"></canvas>
     <p><br><img src="game_L/4k.png" alt="게임그림" class="gamedownimg" width="16%"></p>
       <a href="https://github.com/codebreaker0207/chess_aehee_game/releases/download/1.0/start.exe" download>
-       <button class="towdo">타워 디펜스 다운로드</button>
+       <button class="tbtn" id="towdo">타워 디펜스 다운로드</button>
       </a>
   </section>
 
@@ -152,7 +152,7 @@
     <p id="profileEmail">로그인되어 있지 않습니다.</p>
     <a href="quiz/index.html" class="btn">
       <!-- <img src="game_L/snake_L.png" alt="퀴즈 풀기" width="200">-->
-      <button> 오늘의 퀴즈 </button>
+      <button class="tbtn"> 오늘의 퀴즈 </button>
     </a>
   </div>
 </main>
