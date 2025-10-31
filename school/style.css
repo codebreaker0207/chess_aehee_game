@@ -1,0 +1,91 @@
+:root {
+  --bg: #f3f7fb;
+  --ground: #e1e8f5;
+  --player: #2b7be4;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+  background: linear-gradient(180deg, var(--bg), #eaf1ff);
+}
+.wrap {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game {
+  width: 360px;
+  height: 640px;
+  background: linear-gradient(#fff, #f7fbff);
+  border-radius: 12px;
+  box-shadow: 0 6px 30px rgba(20, 30, 80, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  background: transparent;
+}
+.hud {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.panel {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 18px;
+}
+.btn {
+  background: #fff;
+  border: 1px solid #dbe4f5;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn:hover {
+  background: #f2f5ff;
+}
+.centerOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+}
+.hidden {
+  display: none;
+}
+.big {
+  font-size: 20px;
+  font-weight: 700;
+}
+.small {
+  font-size: 14px;
+  opacity: 0.9;
+}
+.btns {
+  display: flex;
+  gap: 8px;
+}
