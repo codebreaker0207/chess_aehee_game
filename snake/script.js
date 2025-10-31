@@ -52,11 +52,12 @@ function generateFood() {
 
 // 키보드 입력
 document.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
-    if (event.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
-    if (event.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-    if (event.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+    if ((event.key === "w" || event.key === "W") && direction !== "DOWN") direction = "UP";
+    if ((event.key === "s" || event.key === "S") && direction !== "UP") direction = "DOWN";
+    if ((event.key === "a" || event.key === "A") && direction !== "RIGHT") direction = "LEFT";
+    if ((event.key === "d" || event.key === "D") && direction !== "LEFT") direction = "RIGHT";
 });
+
 
 function draw() {
     ctx.fillStyle = "#222";
