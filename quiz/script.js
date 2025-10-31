@@ -56,7 +56,7 @@ function loadDailyQuiz() {
     currentQuiz = allQuizzes[dailyQuizIndex];
 
     document.getElementById('date-display').textContent = `날짜: ${todayDate}`;
-    document.getElementById('question').textContent = `${dailyQuizIndex + 1}번 문제: ${currentQuiz.question}`;
+    document.getElementById('question').textContent = '${currentQuiz.question}`;
     
     const optionsDiv = document.getElementById('options');
     optionsDiv.innerHTML = '';
@@ -110,3 +110,4 @@ function checkAnswer() {
 document.addEventListener('DOMContentLoaded', loadDailyQuiz);
 
 document.getElementById('submit-quiz').addEventListener('click', checkAnswer);
+
