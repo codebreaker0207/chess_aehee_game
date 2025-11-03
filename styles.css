@@ -95,7 +95,9 @@ main {
 
 .tbtn {
   border: none;
-  background-color: #008;
+  border-radius: 10px;
+  background-color: #ffa;
+  color: #fff;
 }
 
 /* .web {position: absolute;right: 5%;transform: translateY(-50%);} */
