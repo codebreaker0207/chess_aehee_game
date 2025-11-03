@@ -100,6 +100,10 @@ main {
   color: #fff;
 }
 
+.bar-a {
+  color: #333;
+}
+
 .bar-bt {
   border: none;
   background-color: #333;
