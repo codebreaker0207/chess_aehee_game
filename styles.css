@@ -24,19 +24,7 @@ header {
   height: 120px;
 }
 
-@media (min-width: 431px) {
-  header h1 {
-    margin: 0.4em 0;
-  }
-
-  header img {
-    position: absolute;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  #intro {
+#intro {
     margin: 0 20%;
     text-align: left !important;
   }
@@ -52,6 +40,20 @@ header {
   #aehee {
     padding: 2% 0 15% 0;
   }
+  
+
+@media (min-width: 431px) {
+  header h1 {
+    margin: 0.4em 0;
+  }
+
+  header img {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   
   nav {
     margin-top: 10px;
