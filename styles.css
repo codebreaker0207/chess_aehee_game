@@ -116,9 +116,10 @@ main {
 
 .profile-set {
   border: 1px;
+  border-color: #111;
   border-radius: 4px;
   background-color: #fafafa;
-  color: #fff;
+  color: #000;
 }
 
 .bar-a {
