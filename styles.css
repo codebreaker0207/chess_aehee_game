@@ -115,8 +115,8 @@ main {
 }
 
 .profile-set {
-  border: 1px;
-  border-color: #111;
+  border: 2px;
+  border-color: #010101;
   border-radius: 4px;
   background-color: #fafafa;
   color: #000;
