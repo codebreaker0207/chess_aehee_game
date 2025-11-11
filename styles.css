@@ -114,6 +114,14 @@ main {
   color: #fff;
 }
 
+sabasi {
+  border: 5px;
+  border-color: #010101;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+}
+
 .profile-set {
   border: 5px;
   border-color: #010101;
