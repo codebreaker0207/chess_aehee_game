@@ -107,6 +107,10 @@ main {
   padding: 20px;
 }
 
+.btn {
+  color: #fff;
+}
+
 .tbtn {
   border: none;
   border-radius: 5px;
