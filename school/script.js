@@ -175,7 +175,7 @@ function resetGame() {
   objects = [];
   updateHUD();
   document.getElementById("overlay").classList.remove("hidden");
-  document.querySelector(".big").textContent = "💩 똥피하기 🍬";
+  document.querySelector(".big").textContent = "🗑️ 청소피하기 🍬";
 }
 
 document.getElementById("startBtn").addEventListener("click", startGame);
