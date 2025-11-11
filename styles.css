@@ -115,12 +115,11 @@ main {
 }
 
 .subasi {
-  border: 5px;
-  border-color: #010101;
+  border: 5px, solid, #010101;
   border-radius: 4px;
   background-color: #fff;
   color: #000;
-  font-size: 2em;
+  font-size: 1.2em;
 }
 
 .profile-set {
