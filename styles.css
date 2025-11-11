@@ -127,10 +127,9 @@ main {
 }
 
 .profile-set {
-  border: 5px;
-  border-color: #010101;
+  border: 0.3px solid #080808;
   border-radius: 4px;
-  background-color: #fafafa;
+  background-color: #010101;
   color: #000;
 }
 
