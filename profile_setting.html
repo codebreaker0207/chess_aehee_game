@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로필 설정</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="profile-settings-page">
+  <header class="profile-settings-header">
+    <h1>프로필 설정</h1>
+    <a class="profile-settings-back" href="index.html#profill">← 프로필로 돌아가기</a>
+  </header>
 
+  <main class="profile-settings">
+    <section class="profile-settings-card">
+      <h2>나만의 프로필 사진</h2>
+      <p class="profile-settings-description">
+        컴퓨터에 있는 사진을 선택해 나만의 프로필을 만들어 보세요.
+        저장하면 이 브라우저에서 항상 같은 프로필 사진이 보여집니다.
+      </p>
+
+      <div class="profile-preview" aria-live="polite">
+        <img id="profilePreview" src="profill.png" alt="프로필 이미지 미리보기" />
+      </div>
+
+      <label class="profile-file-label" for="profileImageInput">
+        내 컴퓨터에서 사진 선택
+        <input id="profileImageInput" type="file" accept="image/*" />
+      </label>
+
+      <div class="profile-actions">
+        <button id="saveProfileImage" type="button" class="profile-action-btn primary">저장</button>
+        <button id="resetProfileImage" type="button" class="profile-action-btn">기본 이미지로</button>
+      </div>
+
+      <p id="profileStatus" class="profile-status" role="status"></p>
+
+      <p class="profile-settings-tip">
+        ⚠️ 다른 컴퓨터나 브라우저에서는 같은 이미지를 다시 설정해야 해요.
+      </p>
+    </section>
+  </main>
+
+  <script src="profile.js"></script>
+</body>
+</html>
