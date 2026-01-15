@@ -165,8 +165,53 @@
     ctx.fillStyle = '#ffd54f';
     ctx.font = '28px Malgun Gothic, Arial, sans-serif';
     ctx.fillText('강화 게임', 60, 90);
+    drawUpgradeVisual();
 
     requestAnimationFrame(loop);
+  }
+
+  function drawUpgradeVisual(){
+    const centerX = W / 2;
+    const centerY = H / 2 + 40;
+    const baseSize = 60;
+    const size = baseSize + Math.min(level, MAX_LEVEL) * 4;
+    const colors = ['#cfd8dc', '#b0bec5', '#90a4ae', '#80cbc4', '#4db6ac', '#26a69a', '#26c6da', '#29b6f6', '#42a5f5', '#5c6bc0', '#7e57c2', '#ab47bc', '#ec407a', '#ef5350', '#ffa726', '#ffb300', '#fdd835', '#d4e157', '#9ccc65', '#66bb6a', '#26a69a'];
+    const color = colors[Math.min(level, colors.length - 1)];
+    const glow = 10 + level * 1.5;
+
+    ctx.save();
+    ctx.translate(centerX, centerY);
+    ctx.shadowColor = color;
+    ctx.shadowBlur = glow;
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(0, 0, size, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#111';
+    ctx.beginPath();
+    ctx.arc(0, 0, size - 16, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(-size * 0.55, 0);
+    ctx.lineTo(size * 0.55, 0);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, -size * 0.55);
+    ctx.lineTo(0, size * 0.55);
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffd54f';
+    ctx.font = '22px Malgun Gothic, Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`+${level}`, 0, 0);
+    ctx.restore();
   }
 
   // 시작
