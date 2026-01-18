@@ -213,6 +213,7 @@ class Board {
         }
         return moves;
     }
+
     generate_legal(){
         const legal = [];
         for (const m of this.generate_pseudo_legal()){
@@ -271,7 +272,7 @@ class Board {
         }
     }
 
-    _knight_moves(r,c,moves){                
+    _knight_moves(r,c,moves){
         const p = this.grid[r][c];
         const deltas = [[2,1],[1,2],[-1,2],[-2,1],[-2,-1],[-1,-2],[1,-2],[2,-1]];
         for (const [dr,dc] of deltas){
@@ -300,6 +301,7 @@ class Board {
                         moves.push(new Move([r,c],[rr,cc],p,tgt));
                     break;
                 }
+                rr+=dr; cc+=dc;
             }
         }
     }
@@ -441,6 +443,7 @@ class Board {
             const cap_r = m.dst[0] + (this.is_white(m.piece) ? 1 : -1);
             this.set_piece([cap_r, m.dst[1]], m.captured);
         }
+
         // side, rights, en_passant
         this.white_to_move = !this.white_to_move;
         this.en_passant = m.prev_en_passant ? [...m.prev_en_passant] : null;
@@ -547,6 +550,9 @@ class Game {
 
     undo(){
         this.board.pop();
+        if (this.aiEnabled && !this.board.white_to_move && this.board.move_history.length){
+            this.board.pop();
+        }
         this.selected = null;
         this.cached_legal = [];
         this.promotion_pending = null;
@@ -565,6 +571,7 @@ class Game {
         // 게임 종료 시 입력 차단
         if (this.board.checkmate() || this.board.stalemate()) return;
         if (this.promotion_pending) return;
+        if (this.aiEnabled && !this.board.white_to_move) return;
 
         const target = e.target.closest('.square');
         if (!target) return;
@@ -616,8 +623,8 @@ class Game {
             this.selected = null;
             this.cached_legal = [];
         }
-        this.draw();␊
-    }␊
+        this.draw();
+    }
 
     showPromotion(isWhite, r, c){
         this.promoOptions.innerHTML = '';
@@ -730,10 +737,34 @@ class Game {
 
         // 4) 말 렌더링 (유니코드)
         for (let r=0; r<ROWS; r++){
+            for (let c=0; c<COLS; c++){
+                const p = this.board.grid[r][c];
+                const pieceEl = this.getPieceEl(r,c);
+                if (!pieceEl) continue;
+                pieceEl.textContent = PIECE_TO_UNICODE[p] || '';
+                pieceEl.className = 'piece';
+                if (p !== '.'){
+                    pieceEl.classList.add(/[A-Z]/.test(p) ? 'white' : 'black');
+                }
+            }
+        }
 
+        // 5) 상태 텍스트
+        let status = this.board.white_to_move ? "백 차례" : "흑 차례";
+        if (this.board.checkmate()){
+            status = this.board.white_to_move ? "체크메이트 — 흑 승" : "체크메이트 — 백 승";
+        } else if (this.board.stalemate()){
+            status = "스테일메이트 — 무승부";
+        } else if (this.board.in_check(this.board.white_to_move)){
+            status = this.board.white_to_move ? "백 체크" : "흑 체크";
+        }
+        this.statusEl.textContent = status;
+    }
+}
 
-
-
-
-        
-        
+// ------------------------------
+// 시작
+// ------------------------------
+window.addEventListener('load', ()=>{
+    new Game();
+});
