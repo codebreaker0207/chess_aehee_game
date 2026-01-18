@@ -116,6 +116,11 @@ h1 {
    ==================================== */
 #controls {
     margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 #controls button {
@@ -123,6 +128,25 @@ h1 {
     margin: 0 5px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.ai-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.ai-control select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.ai-toggle input {
+    margin-right: 6px;
 }
 
 #status {
@@ -218,3 +242,4 @@ h1 {
         --square-size: 34px;
     }
 }
+
