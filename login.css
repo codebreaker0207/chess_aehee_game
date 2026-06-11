@@ -5,14 +5,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Pretendard", "Noto Sans KR", sans-serif;
-    background: linear-gradient(135deg, #74ABE2, #5563DE); /* 예쁜 그라데이션 */
+    font-family: "Do Hyeon", sans-serif;
+    background: linear-gradient(135deg, #74ABE2, #5563DE);
     color: #fff;
   }
 
-  /* 로그인 박스 */
+  
   body > div {
-    background: rgba(255, 255, 255, 0.95); /* 반투명 흰색 */
+    background: rgba(255, 255, 255, 0.95); 
     color: #111;
     padding: 40px 50px;
     border-radius: 16px;
@@ -33,13 +33,13 @@
     color: #555;
   }
 
-  /* 구글 로그인 버튼 */
+  
   #googleLoginBtn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: #4285F4; /* 구글 색상 */
+    background-color: #4285F4; 
     color: white;
     font-weight: 600;
     border: none;
@@ -62,7 +62,7 @@
     box-shadow: none;
   }
 
-  /* 반응형 */
+  
   @media(max-width: 480px) {
     body > div {
       padding: 30px 20px;
