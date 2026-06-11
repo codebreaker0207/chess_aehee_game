@@ -1,5 +1,5 @@
 body {
-  font-family: "Do Hyeon", sans-serif;
+  font-family: "Do Hyeon", sans-serif !important;
   margin: 0;
   padding: 0;
   text-align: center;
